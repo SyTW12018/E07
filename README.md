@@ -19,6 +19,7 @@ La planificación es una parte importante de un desarrollo de una aplicación, p
 - Perfiles de Usuario y empresas
     - Ver perfiles de usuarios y empresas
     - Ver ofertas de empresa
+    - Generar nuevas publicaciones
 
 - Ofertas de empleo
     - Añadir nuevas ofertas
