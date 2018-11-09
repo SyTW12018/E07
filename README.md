@@ -31,6 +31,14 @@ La planificación es una parte importante de un desarrollo de una aplicación, p
 
 Nuestra aplicación utilizará el Stack de desarrollo MEVN, es decir, el back-end estará bajo NodeJS junto a Express y como base de datos MongoDB; y el front-end usará el framework Vue.
 
+Haremos uso de varias librerias en nuestra aplicación:
+- Mongoose: Para la gestión de modelos de la base de datos.
+- Dotenv: Para la gestión de las variables de conexión.
+- bcrypt-nodejs: Para la encriptación de contraseñas.
+- jwt-simple: Para la gestión de tokens de sesiones.
+- moment: Para controlar y generar fechas de expiración para los tokens.
+- Express: Para montar el servidor REST.
+
 # Componentes del Grupo
 - Alejandro González Alonso
 - Lucía Muñoz González
