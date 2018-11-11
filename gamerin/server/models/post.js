@@ -1,30 +1,23 @@
 var mongoose = require('mongoose');
 var PostSchema = new mongoose.Schema({
 	body: {
-	type: String,
-	minlength: 10,
-	maxlength: 260
+		type: String,
+		minlength: 10,
+		maxlength: 260
 	},
 	createAt: Date ,
 	postType:{
-	required: true,
-	type: String
+		required: true,
+		type: String
+	 },
+	_id: {
+		type:String,
+		default:id.generate()
 	},
-	comments: [{
-	type: mongoose.Schema.Types.ObjectId,
-	ref: 'Comment'
-	}],
-	shares: [{
-	type: mongoose.Schema.Types.ObjectId,
-	ref: 'Post'
-	}],
-	tags: [{
-	type: mongoose.Schema.Types.ObjectId,
-	ref: 'Tag'
-	}],
-	likes: [{
-	type: mongoose.Schema.Types.ObjectId,
-	ref: 'Like'
-	}]
-	});
+	creator: {
+		type:ObjectId,
+		ref:"User"
+	}
+});
+		
 module.exports = mongoose.model("Post", PostSchema);
