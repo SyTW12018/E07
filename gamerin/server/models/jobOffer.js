@@ -3,7 +3,7 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let userSchema = new Schema({
+let JobOfferSchema = new Schema({
 
     nameEnterprise: String,
     place: String,
