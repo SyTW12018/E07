@@ -10,10 +10,6 @@ var PostSchema = new mongoose.Schema({
 		required: true,
 		type: String
 	 },
-	_id: {
-		type:String,
-		default:id.generate()
-	},
 	creator: {
 		type:ObjectId,
 		ref:"User"
