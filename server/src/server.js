@@ -11,13 +11,13 @@ let dbhost = process.env.DB_HOST;
 let dbname = process.env.DB_NAME;
 let dbuser = process.env.DB_USER;
 let dbpass = process.env.DB_PASS;
-
+console.log(`mongodb://${dbuser}:${dbpass}@${dbhost}:${dbport}/${dbname}`, { useNewUrlParser: true });
 mongoose.connect(`mongodb://${dbuser}:${dbpass}@${dbhost}:${dbport}/${dbname}`, (err, res)=>{
     if(!err){
         console.log("Mongoose Connected");
         app.listen(port, host, ()=>{
             console.log(`Server API REST listening in http://${host}:${port}`);
-        })
+        });
     }
     else {
         throw err;
