@@ -54,7 +54,7 @@ function loginUser(req, res) {
             else {
                 bcrypt.compare(params.password, user.password, (err, check) => {
                     if (check) {
-                        res.status(200).send({ 'Usuario encontrado'});
+                        res.status(200).send({message:'Usuario encontrado'});
                     }
                     else {
                         res.status(200).send({ message: 'Contraseña Erronea' });
