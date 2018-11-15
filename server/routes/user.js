@@ -9,3 +9,5 @@ let api = express.Router();
 
 api.post('/register', UserController.registerUser);
 api.post('/login', UserController.loginUser);
+
+module.exports = api;

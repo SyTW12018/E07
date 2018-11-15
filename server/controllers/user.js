@@ -7,6 +7,7 @@ let jwt = require('../services/jwt');
 function registerUser(req, res) {
     let newUser = new User();
     let params = req.body;
+    console.log(params);
 
     if (params.username && params.email) {
         newUser.username = params.username;

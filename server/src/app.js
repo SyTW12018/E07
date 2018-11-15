@@ -1,6 +1,7 @@
 'use strict'
 
 let express = require('express');
+let bodyParser = require('body-parser');
 
 let app = express();
 
@@ -8,6 +9,9 @@ let app = express();
 //Rutas
 
 let userRoutes = require('../routes/user');
+
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 
 app.use('/api', userRoutes);
 
