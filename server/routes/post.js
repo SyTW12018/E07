@@ -1,7 +1,7 @@
 'use strict'
 
 let express = require('express');
-let PostController = require('../controller/post');                                                                                                                                                                                                                                                                                                                                                                                                                  
+let PostController = require('../controllers/post');                                                                                                                                                                                                                                                                                                                                                                                                                  
 
 let mdw_auth = require('../middlewares/authentication');
 
