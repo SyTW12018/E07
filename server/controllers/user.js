@@ -2,10 +2,12 @@
 
 let bcrypt = require('bcrypt-nodejs');
 let User = require('../models/user');
+let jwt = require('../services/jwt');
 
 function registerUser(req, res) {
     let newUser = new User();
     let params = req.body;
+    console.log(params);
 
     if (params.username && params.email) {
         newUser.username = params.username;
@@ -54,10 +56,18 @@ function loginUser(req, res) {
             else {
                 bcrypt.compare(params.password, user.password, (err, check) => {
                     if (check) {
-                        res.status(200).send({message:'Usuario encontrado'});
+                        if(params.needToken){
+                            res.status(200).send({
+                                token: jwt.createToken(user)
+                            });
+                        }
+                        else{
+                            res.status(200).send({user});
+                        }
+                        
                     }
                     else {
-                        res.status(200).send({ message: 'Contraseña Erronea' });
+                        res.status(200).send({ message: 'Datos de login incorrectos!' });
                     }
                 });
             }
