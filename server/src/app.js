@@ -7,6 +7,11 @@ let app = express();
 
 //Rutas
 
+let userRoutes = require('../routes/user');
+
+app.use('/api', userRoutes);
+
+
 //Cabeceras HTTP
 app.use((req,res,next)=>{
     res.header('Access-Control-Allow-Origin', '*');
