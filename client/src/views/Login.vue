@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <Home />
+    <Login />
     <Footer />
   </div>
   
@@ -10,12 +10,12 @@
 <script>
   import Footer from '../components/Footer'
   import Navbar from '../components/Navbar'
-  import Home from '../components/Home'
+  import Login from '../components/Login'
   export default {
     components: {
       Navbar,
       Footer,
-      Home
+      Login
     }
   }
 </script>
