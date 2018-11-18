@@ -1,29 +1,57 @@
 'use strict'
 
-let offer = require('../models/jobOffer.js')
+let Offer = require('../models/jobOffer');
 
-
-function newOffer(){
+function newOffer(req, res) {
     
-    let mongoose = require('mongoose');
-     
-    mongoose.connect('mongodb://localhost/admin', function (err) {
-     
-       if (err) throw err;
-     
-       console.log('Successfully connected');
-     
+    let newOffer = new Offer();
+    let params = req.body;
+    console.log(params);
+
+    newOffer.nameEnterprise = params.nameEnterprise;
+    newOffer.place = params.email.toLowerCase();
+    newOffer.published = params.published;
+    newOffer.salary = params.salary;
+    newOffer.exp =  params.exp;
+    newOffer.kindOfJob = params.kindOfJob;
+    newOffer.description = params.description;
+    
+    newOffer.save((err, userSaved) => {
+        if (err) {
+            res.status(500).send({ message: "Error en el servidor al registrar la oferta de trabajo", Error: err });
+        }
+        else {
+            if (!userSaved) {
+                res.status(404).send({ message: "La oferta de trabajo no se ha registrado" });
+            }
+           else {
+                res.status(200).send({ message: "La oferta de trabajo se ha registrado satisfactoriamente", user: userSaved });
+            }
+        }
     });
-    
-    
-}
-    
-function deleteOffer(){
-        
-}
-    
-function updateOffer(){
-        
-}
-    
 
+}
+    
+function deleteOffer(req,res){
+    
+   newOffer.remove({
+       nameEnterprise: req.params.nameEnterprise
+       place: req.params.place
+       published: req.params.published
+       salary: req.params.salary
+       exp: req.params.exp
+       kindOfJob: req.params.kindOfJob
+       description: req.params.description
+       
+   }, function(error){
+      if(error){
+         res.send('Error al intentar eliminar el personaje.');
+      }else{ 
+         
+      }
+   });
+    
+        
+}
+    
+module.exports = { newOffer, deleteOffer };
