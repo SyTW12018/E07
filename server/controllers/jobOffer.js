@@ -9,23 +9,23 @@ function newOffer(req, res) {
     console.log(params);
 
     newOffer.nameEnterprise = params.nameEnterprise;
-    newOffer.place = params.email.toLowerCase();
+    newOffer.place = params.place
     newOffer.published = params.published;
     newOffer.salary = params.salary;
-    newOffer.exp =  params.exp;
+    newOffer.exp = params.exp;
     newOffer.kindOfJob = params.kindOfJob;
     newOffer.description = params.description;
     
-    newOffer.save((err, userSaved) => {
+    newOffer.save((err, offerSaved) => {
         if (err) {
             res.status(500).send({ message: "Error en el servidor al registrar la oferta de trabajo", Error: err });
         }
         else {
-            if (!userSaved) {
+            if (!offerSaved) {
                 res.status(404).send({ message: "La oferta de trabajo no se ha registrado" });
             }
            else {
-                res.status(200).send({ message: "La oferta de trabajo se ha registrado satisfactoriamente", user: userSaved });
+                res.status(200).send({ message: "La oferta de trabajo se ha registrado satisfactoriamente", offer: offerSaved });
             }
         }
     });
