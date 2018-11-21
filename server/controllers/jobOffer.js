@@ -35,17 +35,18 @@ function newOffer(req, res) {
 function deleteOffer(req,res){
     
    newOffer.remove({
-       nameEnterprise: req.params.nameEnterprise
-       place: req.params.place
-       published: req.params.published
-       salary: req.params.salary
-       exp: req.params.exp
-       kindOfJob: req.params.kindOfJob
+       
+       nameEnterprise: req.params.nameEnterprise,
+       place: req.params.place,
+       published: req.params.published,
+       salary: req.params.salary,
+       exp: req.params.exp,
+       kindOfJob: req.params.kindOfJob,
        description: req.params.description
        
    }, function(error){
       if(error){
-         res.send('Error al intentar eliminar el personaje.');
+         res.send('Error al intentar eliminar la oferta de trabajo.');
       }else{ 
          
       }
