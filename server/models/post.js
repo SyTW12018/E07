@@ -1,17 +1,17 @@
-var mongoose = require('mongoose');
-var PostSchema = new mongoose.Schema({
+let mongoose = require('mongoose');
+let PostSchema = new mongoose.Schema({
 	body: {
 		type: String,
 		minlength: 10,
 		maxlength: 260
 	},
 	createAt: Date ,
-	postType:{
+	postType: {
 		required: true,
 		type: String
 	 },
 	creator: {
-		type:ObjectId,
+		type: mongoose.Schema.Types.ObjectId,
 		ref:"User"
 	}
 });

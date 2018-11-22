@@ -2,7 +2,7 @@
 
 let Post = require('../models/post');
 
-        fuction addPost (req,res){
+        function addPost (req,res){
 
                 let newPost = new Post();
                 let params = req.body;
@@ -12,36 +12,39 @@ let Post = require('../models/post');
 
                 newPost.creator = params.creator;
                 newPost.postType = params.postType;
+                newPost.body = params.body;
 
-                newPost.save((err, userSaved) => {
+
+                newPost.save((err, postSaved) => {
                         if (err) {
                         res.status(500).send({ message: "Error en el servidor al registrar el Post", Error: err });
                         }
                         else {
-                        if (!userSaved) {
+                        if (!postSaved) {
                         res.status(404).send({ message: "El Post  no se ha registrado" });
                         }
                         else {
-                        res.status(200).send({ message: "El post no se ha  registrado satisfactoriamente", user: userSaved });
+                        res.status(200).send({ message: "El post no se ha  registrado satisfactoriamente", post: postSaved });
                          }
-                    });
+                    }
 
+                });
+        
         }
 
+        function deletePost(req,res){
 
-        fuction deletePost(req,res){
-
-                newPost.remove({
+                Post.remove({
                         creator: req.params.creator
-                        postType: req.params.postType
-                },function(error){
+    
+               },function(error){
                   if(error){
-                      res.send('Error al intentar eliminar el personaje.');
+                      res.send('Error al intentar eliminar el post.');
                     }
                   else{
                         }
                 });
 
-             }                                                                                                                               1,1      Comienzo
-	
-	module.exports = {newPost,deletePost };
+             }                                                                                                                          
+        
+	module.exports = {addPost,deletePost };

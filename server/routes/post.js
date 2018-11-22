@@ -7,7 +7,7 @@ let mdw_auth = require('../middlewares/authentication');
 
 let api = express.Router();
 
-api.post('/addpost', PostController.addpost);
-api.post('/getpost/:id', PostController.getpost);
+api.post('/addPost', PostController.addPost);
+api.post('/deletePost',PostController.deletePost);
 
 module.exports = api;
