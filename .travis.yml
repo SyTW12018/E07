@@ -1,17 +1,17 @@
 languaje: node_js
-node_js: 
-  - "11"
-env:
-  ENV=test
-
+node_js:
+- '11'
+env: ENV=test
 install:
-  - cd client
-  - "npm install"
-  - cd ../server
-  - "npm install"
-
+- cd client
+- npm install
+- cd ../server
+- npm install
 script:
-  - cd ../server && npm test
-
+- cd ../server && npm test
 services:
-  - mongodb
+- mongodb
+notifications:
+  slack:
+    rooms:
+      secure: Cjs81NSDyNc1qpUoRWeL3nn3AtljBqYRWXqNP7q2sgBT/Y5XQLsia+csk8rQ9kSdm4NgIEg8J1dlQLRs7GOXlgMvxf5tkR+QCzswFhvPXlg3SqI7+XWDFnwL6J6/Gm7pQ/zWRvzoXsEv/L10+Ki8ACOlN8SSH7NvRGSjnGsDAojASj/IhCAw1Qerv8A49I+N6t1lB4yqyjcVF9ptTymW4C9B6h1IsmogUAG48Ywl8YbUbzzwrpBe5V3H/otnsebEWmk7N8yu7Pb733BGvt8GtOFv4F13B0xO7M7kpz+EyzGFrX2e2/Lh051Uk2lF7k9p2ww1lPsqpfqSvJcLxvHLgbKK/YG155j+Fi57DjFYKo4R6UWER5D7kVAM++K635okLsxDzF5kzG9x7VQRawn80L5MObb4R3ovfJDE2nUFmRp36LJMP4tCppWHDaoHh6m2P3dOXQd+m4mIKnmQkanZ0pIfiiIQRM/85PWRfMNHQLeAC44kJLSoC915g7yLxeSJEBPh1AskDoaqRGddwEcDlAuSizLEAgugkCD5AQ8S1KH2mlL5HeqtlNcWQ7zqJNpR7TlporxuR7kGrx7M5EEPAkpxiBUWOqCQwVzF6ZutD6Czqsr7opW8KkG8t/o5xYYXUeeLBzGK+lEvzdRnUig2gTk+iAySab0h4W4WV5jwBU0=
