@@ -5,8 +5,8 @@ const uniqueValidation = require('mongoose-beautiful-unique-validation');
 let Schema = mongoose.Schema;
 
 let applySchema = new Schema({
-    offerid: { type: mongoose.Schema.Types.ObjectId, ref: 'jobOffer'},
-    userid: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    offerid: { type: mongoose.Schema.Types.ObjectId, ref: 'jobOffer' },
+    userid: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     description: String
 });
 

@@ -39,16 +39,16 @@ function newApply(req, res) {
 function deleteApply(req, res) {
     let params = req.body;
 
-    Apply.findOneAndDelete({userid: params.userid, offerid: params.offerid}, (err, applyDeleted)=>{
-        if(err){
-            res.status(500).send({message: "Error en el servidor", err});
+    Apply.findOneAndDelete({ userid: params.userid, offerid: params.offerid }, (err, applyDeleted) => {
+        if (err) {
+            res.status(500).send({ message: "Error en el servidor", err });
         }
         else {
-            if(!applyDeleted){
-                res.status(404).send({message: "No existe la solicitud a borrar"});
+            if (!applyDeleted) {
+                res.status(404).send({ message: "No existe la solicitud a borrar" });
             }
             else {
-                res.status(200).send({message: "La solicitud se ha borrado correctamente", apply: applyDeleted});
+                res.status(200).send({ message: "La solicitud se ha borrado correctamente", apply: applyDeleted });
             }
         }
     })
