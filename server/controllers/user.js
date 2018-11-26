@@ -7,7 +7,6 @@ let jwt = require('../services/jwt');
 function registerUser(req, res) {
     let newUser = new User();
     let params = req.body;
-    console.log(params);
 
     if (params.username && params.email) {
         newUser.username = params.username;
@@ -20,14 +19,22 @@ function registerUser(req, res) {
                 newUser.password = hash;
                 newUser.save((err, userSaved) => {
                     if (err) {
-                        res.status(500).send({ message: "Error en el servidor al guardar el usuario", Error: err });
+                        if (err.name == "ValidationError") {
+                            let errorMsg = "";
+                            for (let p in err.errors) {
+                                errorMsg = err.errors[p].message;
+                            }
+                            res.status(500).send({ message: errorMsg, errors: err.errors});
+                        } else {
+                            res.status(500).send({ message: "Error en el servidor al guardar el usuario", err });
+                        }
                     }
                     else {
                         if (!userSaved) {
                             res.status(404).send({ message: "El usuario no se ha registrado" });
                         }
                         else {
-                            res.status(200).send({ message: "Usuario registrado satisfactoriamente", user: userSaved });
+                            res.status(201).send({ message: "Usuario registrado satisfactoriamente", user: userSaved });
                         }
                     }
                 });
@@ -56,15 +63,15 @@ function loginUser(req, res) {
             else {
                 bcrypt.compare(params.password, user.password, (err, check) => {
                     if (check) {
-                        if(params.needToken){
+                        if (params.needToken) {
                             res.status(200).send({
                                 token: jwt.createToken(user)
                             });
                         }
-                        else{
-                            res.status(200).send({user});
+                        else {
+                            res.status(200).send({ user });
                         }
-                        
+
                     }
                     else {
                         res.status(200).send({ message: 'Datos de login incorrectos!' });
