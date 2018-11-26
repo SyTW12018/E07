@@ -5,8 +5,8 @@ require('dotenv').config();
 let mongoose = require('mongoose');
 let app = require('./app');
 
-let port = process.env.PORT;
-let host = process.env.HOST;
+let port = process.env.PORT || 'localhost';
+let host = process.env.HOST || 8080;
 
 let mongoURI;
 if (process.env.ENV == 'test') {
