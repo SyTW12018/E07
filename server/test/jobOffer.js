@@ -41,7 +41,7 @@ chai.use(chaiHttp);
                                     .end((err, res)=>{
                                         res.should.have.status(200);
                                         res.body.should.be.a('object');
-                                        res.body.should.have.property('newOffer');
+                                        res.body.should.have.property('offers');
                                         res.body.should.have.property('message').eql('La oferta de trabajo se ha registrado satisfactoriamente');
                                         done();
                                     });
