@@ -3,11 +3,11 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
-let JobOfferSchema = new Schema({
+let jobOfferSchema = new Schema({
 
     nameEnterprise: String,
     place: String,
-    published: Date,
+    published: String,
     salary: Number,
     exp: String,
     kindOfJob: String,
@@ -16,4 +16,4 @@ let JobOfferSchema = new Schema({
 
 });
 
-module.exports = mongoose.model('JobOffer', userSchema);
+module.exports = mongoose.model('jobOffer', jobOfferSchema);
