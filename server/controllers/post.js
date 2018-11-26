@@ -24,7 +24,7 @@ let Post = require('../models/post');
                         res.status(404).send({ message: "El Post  no se ha registrado" });
                         }
                         else {
-                        res.status(200).send({ message: "El post no se ha  registrado satisfactoriamente", post: postSaved });
+                        res.status(200).send({ message: "El post  se ha  registrado satisfactoriamente", post: postSaved });
                          }
                     }
 
@@ -33,16 +33,23 @@ let Post = require('../models/post');
         }
 
         function deletePost(req,res){
-
-                Post.remove({
-                        creator: req.params.creator
-    
-               },function(error){
-                  if(error){
-                      res.send('Error al intentar eliminar el post.');
+		
+		let params = req.body
+               	
+		
+		Post.FindandDelete({ creator: req.params.creator,postType: req.params.postType},(err,postDeleted)=>{
+    		
+		if (err) {
+                      res.status(500).send({message:"Error Servidor", Error:err});
                     }
-                  else{
-                        }
+                 else {
+			if (!postDeleted) {
+			rest.status(404).send({message:"El Post no existe"});
+			}
+			else {
+			 rest.status(200).send({message:"El Post se ha eliminado", post: postDeleted });
+			}
+                     }
                 });
 
              }                                                                                                                          
