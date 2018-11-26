@@ -6,6 +6,6 @@ let ApplyController = require('../controllers/apply');
 let api = express.Router();
 
 api.post('/newApply', ApplyController.newApply);
-api.post('/discardApply', ApplyController.deleteApply);
+api.delete('/discardApply', ApplyController.deleteApply);
 
 module.exports = api;

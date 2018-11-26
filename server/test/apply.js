@@ -22,8 +22,8 @@ describe('Test for apply controllers', () => {
     describe('Add new application letter', () => {
         it('Add new application', (done) => {
             let testApplication = {
-                offerid: mongoose.ObjectId("1234abcd"),
-                userid: mongoose.ObjectId("4321dcba"),
+                offerid: "41224d776a326fb40f000001",
+                userid: "41224d776a326fb40f000002",
                 description: "Lorem ipsum"
             }
             chai.request(server).post('/api/newApply')
@@ -38,8 +38,8 @@ describe('Test for apply controllers', () => {
         });
         it('Not add two times the same application', (done) => {
             let testApplication = {
-                offerid: mongoose.ObjectId("1234abcd"),
-                userid: mongoose.ObjectId("4321dcba"),
+                offerid: "41224d776a326fb40f000001",
+                userid: "41224d776a326fb40f000002",
                 description: "Lorem ipsum"
             }
             chai.request(server).post('/api/newApply')
@@ -56,8 +56,8 @@ describe('Test for apply controllers', () => {
     describe('Discard application', () => {
         it('Delete apply from db', (done) => {
             let testApplication = {
-                offerid: mongoose.ObjectId("1234abcd"),
-                userid: mongoose.ObjectId("4321dcba"),
+                offerid: "41224d776a326fb40f000001",
+                userid: "41224d776a326fb40f000002",
             }
             chai.request(server).del('/api/discardApply')
                 .send(testApplication)
