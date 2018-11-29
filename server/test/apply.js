@@ -15,7 +15,7 @@ chai.use(chaiHttp);
 
 describe('Test for apply controllers', () => {
     let token;
-    before(async function () {
+    before(async () => {
         await Apply.deleteMany({});
         await User.deleteMany({});
         await chai.request(server).post('/api/register')
@@ -24,7 +24,6 @@ describe('Test for apply controllers', () => {
                 password: 'test',
                 email: 'test@test.com'
             })
-            .then((res) => { });
 
         let loginInfo = {
             email: 'test@test.com',
@@ -39,8 +38,8 @@ describe('Test for apply controllers', () => {
             });
     });
 
-    describe('Add new application letter', function () {
-        it('Add new application', function (done) {
+    describe('Add new application letter', () => {
+        it('Add new application', (done) => {
             let testApplication = {
                 offerid: "41224d776a326fb40f000001",
                 userid: "41224d776a326fb40f000002",
@@ -58,7 +57,7 @@ describe('Test for apply controllers', () => {
                     done();
                 });
         });
-        it('Not add two times the same application', function (done) {
+        it('Not add two times the same application', (done) => {
             let testApplication = {
                 offerid: "41224d776a326fb40f000001",
                 userid: "41224d776a326fb40f000002",
@@ -77,8 +76,8 @@ describe('Test for apply controllers', () => {
         });
     });
 
-    describe('Discard application', function () {
-        it('Delete apply from db', function (done) {
+    describe('Discard application', () => {
+        it('Delete apply from db', (done) => {
             let testApplication = {
                 offerid: "41224d776a326fb40f000001",
                 userid: "41224d776a326fb40f000002",
