@@ -17,6 +17,7 @@ describe('Test for apply controllers', () => {
     let token;
     before(function (done) {
         Apply.deleteMany({});
+        User.deleteMany({});
         chai.request(server).post('/api/register')
             .send({
                 username: 'test',
@@ -24,6 +25,7 @@ describe('Test for apply controllers', () => {
                 email: 'test@test.com'
             })
             .end((err, res) => {
+                console.log(res.body);
                 //done();
             });
 
@@ -40,7 +42,7 @@ describe('Test for apply controllers', () => {
                     console.log(err);
                 }
                 else {
-                    console.log(res);
+                    console.log(res.body);
                     token = res.body.token;
                     //console.log(res.body.token);
                     //console.log("token", token);
