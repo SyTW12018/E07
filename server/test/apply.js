@@ -14,7 +14,7 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('Test for apply controllers', () => {
-    let token;
+    var token;
     before(function (done) {
         Apply.deleteMany({});
         chai.request(server).post('/api/register')
