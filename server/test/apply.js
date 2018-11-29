@@ -15,7 +15,7 @@ chai.use(chaiHttp);
 
 describe('Test for apply controllers', () => {
     let token;
-    before(function (done) {
+    before(async function (done) {
         Apply.deleteMany({});
         User.deleteMany({});
         chai.request(server).post('/api/register')
