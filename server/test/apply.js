@@ -37,6 +37,7 @@ describe('Test for apply controllers', () => {
         chai.request(server).post('/api/login')
             .send(loginInfo)
             .end(function (err, res) {
+                console.log(res.body);
                 token = res.body.token;
                 done();
             });
