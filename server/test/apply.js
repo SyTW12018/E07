@@ -37,6 +37,7 @@ describe('Test for apply controllers', () => {
             .send(loginInfo)
             .end((err, res) => {
                 token = res.body.token;
+                console.log("token", token);
                 done();
             });
     });
