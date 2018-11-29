@@ -14,7 +14,7 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('Test for apply controllers', () => {
-    var token;
+    let token;
     before(function (done) {
         Apply.deleteMany({});
         chai.request(server).post('/api/register')
@@ -37,6 +37,7 @@ describe('Test for apply controllers', () => {
             .send(loginInfo)
             .end((err, res) => {
                 token = res.body.token;
+                console.log("token", token);
                 done();
             });
     });
