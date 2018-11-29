@@ -24,10 +24,7 @@ describe('Test for apply controllers', () => {
                 password: 'test',
                 email: 'test@test.com'
             })
-            .end((err, res) => {
-                console.log(res.body);
-                //done();
-            });
+            .end((err, res) => { });
 
         let loginInfo = {
             email: 'test@test.com',
@@ -38,16 +35,8 @@ describe('Test for apply controllers', () => {
         chai.request(server).post('/api/login')
             .send(loginInfo)
             .end((err, res) => {
-                if (err) {
-                    console.log(err);
-                }
-                else {
-                    console.log(res.body);
-                    token = res.body.token;
-                    //console.log(res.body.token);
-                    //console.log("token", token);
-                    done();
-                }
+                token = res.body.token;
+                done();
 
             });
     });
@@ -59,7 +48,7 @@ describe('Test for apply controllers', () => {
                 userid: "41224d776a326fb40f000002",
                 description: "Lorem ipsum"
             }
-            //console.log("token", token);
+
             chai.request(server).post('/api/newApply')
                 .set({ "authorization": token })
                 .send(testApplication)
@@ -77,7 +66,7 @@ describe('Test for apply controllers', () => {
                 userid: "41224d776a326fb40f000002",
                 description: "Lorem ipsum"
             }
-            //console.log("token", token);
+
             chai.request(server).post('/api/newApply')
                 .set({ "authorization": token })
                 .send(testApplication)

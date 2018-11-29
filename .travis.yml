@@ -2,11 +2,16 @@ languaje: node_js
 node_js:
 - '11'
 env: ENV=test
+
 install:
 - cd client
 - npm install
 - cd ../server
 - npm install
+cache:
+  directories:
+    - ./server/node_modules
+    - ./client/node_modules
 script:
 - cd ../server && npm test
 services:
