@@ -24,7 +24,9 @@ describe('Test for apply controllers', () => {
                 password: 'test',
                 email: 'test@test.com'
             })
-            .end((err, res) => { });
+            .end((err, res) => {
+                console.log(res.body);
+            });
 
         let loginInfo = {
             email: 'test@test.com',
@@ -37,7 +39,6 @@ describe('Test for apply controllers', () => {
             .end((err, res) => {
                 token = res.body.token;
                 done();
-
             });
     });
 
