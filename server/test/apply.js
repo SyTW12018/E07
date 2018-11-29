@@ -24,7 +24,7 @@ describe('Test for apply controllers', () => {
                 password: 'test',
                 email: 'test@test.com'
             })
-            .end((err, res) => {
+            .end(function (err, res) {
                 console.log(res.body);
             });
 
@@ -36,7 +36,7 @@ describe('Test for apply controllers', () => {
 
         chai.request(server).post('/api/login')
             .send(loginInfo)
-            .end((err, res) => {
+            .end(function (err, res) {
                 token = res.body.token;
                 done();
             });
