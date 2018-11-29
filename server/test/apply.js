@@ -32,7 +32,7 @@ describe('Test for apply controllers', () => {
             password: 'test',
             needToken: true
         }
-
+        console.log(token);
         chai.request(server).post('/api/login')
             .send(loginInfo)
             .end((err, res) => {
