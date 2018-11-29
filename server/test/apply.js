@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const chaiHttp = require('chai-http');
 
 let Apply = require('../models/apply');
+let User = require('../models/user');
 let server = require('../src/server');
 
 const chai = require('chai');
@@ -13,20 +14,43 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('Test for apply controllers', () => {
-    before((done) => {
-        Apply.deleteMany({}, (err) => {
-            done();
-        });
+    let token;
+    before(function (done) {
+        Apply.deleteMany({});
+        chai.request(server).post('/api/register')
+            .send({
+                username: 'test',
+                password: 'test',
+                email: 'test@test.com'
+            })
+            .end((err, res) => {
+                //done();
+            });
+
+        let loginInfo = {
+            email: 'test@test.com',
+            password: 'test',
+            needToken: true
+        }
+
+        chai.request(server).post('/api/login')
+            .send(loginInfo)
+            .end((err, res) => {
+                token = res.body.token;
+                done();
+            });
     });
 
-    describe('Add new application letter', () => {
-        it('Add new application', (done) => {
+    describe('Add new application letter', function () {
+        it('Add new application', function (done) {
             let testApplication = {
                 offerid: "41224d776a326fb40f000001",
                 userid: "41224d776a326fb40f000002",
                 description: "Lorem ipsum"
             }
+
             chai.request(server).post('/api/newApply')
+                .set({ "authorization": token })
                 .send(testApplication)
                 .end((err, res) => {
                     res.should.have.status(201);
@@ -36,13 +60,15 @@ describe('Test for apply controllers', () => {
                     done();
                 });
         });
-        it('Not add two times the same application', (done) => {
+        it('Not add two times the same application', function (done) {
             let testApplication = {
                 offerid: "41224d776a326fb40f000001",
                 userid: "41224d776a326fb40f000002",
                 description: "Lorem ipsum"
             }
+
             chai.request(server).post('/api/newApply')
+                .set({ "authorization": token })
                 .send(testApplication)
                 .end((err, res) => {
                     res.should.have.status(500);
@@ -53,13 +79,15 @@ describe('Test for apply controllers', () => {
         });
     });
 
-    describe('Discard application', () => {
-        it('Delete apply from db', (done) => {
+    describe('Discard application', function () {
+        it('Delete apply from db', function (done) {
             let testApplication = {
                 offerid: "41224d776a326fb40f000001",
                 userid: "41224d776a326fb40f000002",
             }
+
             chai.request(server).del('/api/discardApply')
+                .set({ "authorization": token })
                 .send(testApplication)
                 .end((err, res) => {
                     res.should.have.status(200);
