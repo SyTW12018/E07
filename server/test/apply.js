@@ -15,18 +15,16 @@ chai.use(chaiHttp);
 
 describe('Test for apply controllers', () => {
     let token;
-    before(async function (done) {
-        Apply.deleteMany({});
-        User.deleteMany({});
-        chai.request(server).post('/api/register')
+    before(async function () {
+        await Apply.deleteMany({});
+        await User.deleteMany({});
+        await chai.request(server).post('/api/register')
             .send({
                 username: 'test',
                 password: 'test',
                 email: 'test@test.com'
             })
-            .end(function (err, res) {
-                console.log(res.body);
-            });
+            .then((res) => { });
 
         let loginInfo = {
             email: 'test@test.com',
@@ -34,12 +32,10 @@ describe('Test for apply controllers', () => {
             needToken: true
         }
 
-        chai.request(server).post('/api/login')
+        await chai.request(server).post('/api/login')
             .send(loginInfo)
-            .end(function (err, res) {
-                console.log(res.body);
+            .then((res) => {
                 token = res.body.token;
-                done();
             });
     });
 
