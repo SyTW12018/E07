@@ -36,10 +36,17 @@ describe('Test for apply controllers', () => {
         chai.request(server).post('/api/login')
             .send(loginInfo)
             .end((err, res) => {
-                token = res.body.token;
-                console.log(res.body.token);
-                console.log("token", token);
-                done();
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    console.log(res);
+                    token = res.body.token;
+                    //console.log(res.body.token);
+                    //console.log("token", token);
+                    done();
+                }
+
             });
     });
 
@@ -50,7 +57,7 @@ describe('Test for apply controllers', () => {
                 userid: "41224d776a326fb40f000002",
                 description: "Lorem ipsum"
             }
-            console.log("token", token);
+            //console.log("token", token);
             chai.request(server).post('/api/newApply')
                 .set({ "authorization": token })
                 .send(testApplication)
@@ -68,7 +75,7 @@ describe('Test for apply controllers', () => {
                 userid: "41224d776a326fb40f000002",
                 description: "Lorem ipsum"
             }
-            console.log("token", token);
+            //console.log("token", token);
             chai.request(server).post('/api/newApply')
                 .set({ "authorization": token })
                 .send(testApplication)
