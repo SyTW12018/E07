@@ -14,6 +14,7 @@ const should = chai.should();
 chai.use(chaiHttp);
 describe('Test for Offer Controller', () => {
     //Clear Database
+    let offerid;
     before((done) => {
         Offer.deleteMany({}, (err) => {
             done();
@@ -39,9 +40,29 @@ describe('Test for Offer Controller', () => {
                     res.body.should.be.a('object');
                     res.body.should.have.property('offers');
                     res.body.should.have.property('message').eql('La oferta de trabajo se ha registrado satisfactoriamente');
+                    offerid = res.body.offers._id;
                     done();
                 });
+
         });
+    });
+
+    describe('Delete Test Offer', (done) => {
+        it('It should remove the test offer from database', (done) => {
+            let testOfferDel ={ ObjectId: offerid };
+            chai.request(server).post('/api/deleteOffer')
+                .send(testOfferDel)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('Offer');
+                    res.body.should.have.property('message').eql('La oferta de trabajo se ha eliminado');
+                    done();
+                });
+
+        });
+
+
     });
 
 });
