@@ -170,6 +170,7 @@ describe('Full test User-Offer-Token', () => {
                 res.body.should.be.a('object');
                 res.body.should.have.property('token');
                 done();
+            });
         });
-    });
+    }); 
 });
