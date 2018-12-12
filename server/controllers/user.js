@@ -24,7 +24,7 @@ function registerUser(req, res) {
                             for (let p in err.errors) {
                                 errorMsg = err.errors[p].message;
                             }
-                            res.status(500).send({ message: errorMsg, errors: err.errors});
+                            res.status(500).send({ message: errorMsg, errors: err.errors });
                         } else {
                             res.status(500).send({ message: "Error en el servidor al guardar el usuario", err });
                         }
@@ -82,4 +82,20 @@ function loginUser(req, res) {
     });
 }
 
-module.exports = { registerUser, loginUser };
+function getUser(req, res) {
+    let username = req.params.username;
+    User.findOne({ username: username }, (err, user) => {
+        if (err) {
+            res.status(500).send({ message: "Error en el servidor obteniendo la informacion del usuario" });
+        }
+        else {
+            if (!user) {
+                res.status(404).send({ message: "No existe el usuario solicitado" });
+            }
+            else {
+                res.status(200).send({ user: user });
+            }
+        }
+    });
+}
+module.exports = { registerUser, loginUser, getUser };

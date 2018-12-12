@@ -100,7 +100,7 @@ describe('Test for User Controller', () => {
     describe('Obtención de la informacion del usuario', () => {
         it('getUser function', (done) => {
             chai.request(server).get('/api/user/test')
-                .set({ 'authentication': token })
+                .set({ 'authorization': token })
                 .send({})
                 .end((error, res) => {
                     if (error) {
@@ -113,6 +113,22 @@ describe('Test for User Controller', () => {
                         res.body.should.have.nested.property('user.email');
                         res.body.should.have.nested.property('user.name');
                         res.body.should.have.nested.property('user.surname');
+                    }
+                    done();
+                });
+        });
+        it('getUser para un usuario que no existe', (done) => {
+            chai.request(server).get('/api/user/test2')
+                .set({ "authorization": token })
+                .send({})
+                .end((err, res) => {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        res.should.have.status(404)
+                        res.body.should.have.property('message');
+                        res.body.should.have.property('message').eql('No existe el usuario solicitado');
                     }
                     done();
                 });
