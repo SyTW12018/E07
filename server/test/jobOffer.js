@@ -11,19 +11,38 @@ const chai = require('chai');
 
 const should = chai.should();
 
-
 chai.use(chaiHttp);
 describe('Test for Offer Controller', () => {
-    //Clear Database
+    let token;
     let offerid;
-    before((done) => {
-        Offer.deleteMany({}, (err) => {
-            done();
-        });
+    before(async () => {
+        await Offer.deleteMany({});
+        await User.deleteMany({});
+        await chai.request(server).post('/api/register')
+            .send({
+                username: 'test',
+                password: 'test',
+                email: 'test@test.com'
+            })
+
+        let loginInfo = {
+            email: 'test@test.com',
+            password: 'test',
+            needToken: true
+        }
+
+        await chai.request(server).post('/api/login')
+            .send(loginInfo)
+            .then((res) => {
+                token = res.body.token;
+                offerid = res.body.ObjectId;
+
+            });
     });
 
     describe('Register Test Offer', () => {
         it('It should register the info of Test Offer', (done) => {
+
             let testOffer = {
                 nameEnterprise: "ESL",
                 place: "COLOGNE",
@@ -35,13 +54,15 @@ describe('Test for Offer Controller', () => {
 
             }
             chai.request(server).post('/api/newOffer')
+                .set({
+                    "authorization": token
+                })
                 .send(testOffer)
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.have.property('offers');
                     res.body.should.have.property('message').eql('La oferta de trabajo se ha registrado satisfactoriamente');
-                    offerid = res.body.offers._id;
                     done();
                 });
 
@@ -51,9 +72,13 @@ describe('Test for Offer Controller', () => {
     describe('Delete Test Offer', (done) => {
         it('It should remove the test offer from database', (done) => {
             let testOfferDel = {
+
                 ObjectId: offerid
             };
             chai.request(server).post('/api/deleteOffer')
+                .set({
+                    "authorization": token
+                })
                 .send(testOfferDel)
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -66,5 +91,5 @@ describe('Test for Offer Controller', () => {
         });
 
     });
-});
 
+});

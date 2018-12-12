@@ -12,6 +12,7 @@ let userRoutes = require('../routes/user');
 let offerRoutes = require('../routes/jobOffer');
 let applyRoutes = require('../routes/apply');
 
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
