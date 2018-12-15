@@ -2,9 +2,9 @@
 
 let express = require('express');
 let bodyParser = require('body-parser');
-
+let expressLogging = require('express-logging');
+let logger = require('logops');
 let app = express();
-
 
 //Rutas
 
@@ -15,6 +15,7 @@ let applyRoutes = require('../routes/apply');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(expressLogging(logger));
 
 app.use('/api', userRoutes);
 app.use('/api', offerRoutes);
