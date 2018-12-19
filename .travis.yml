@@ -14,9 +14,15 @@ cache:
     - ./client/node_modules
 script:
 - cd ../server && npm test
+- sonar-scanner
 services:
 - mongodb
 notifications:
   slack:
     rooms:
       secure: Cjs81NSDyNc1qpUoRWeL3nn3AtljBqYRWXqNP7q2sgBT/Y5XQLsia+csk8rQ9kSdm4NgIEg8J1dlQLRs7GOXlgMvxf5tkR+QCzswFhvPXlg3SqI7+XWDFnwL6J6/Gm7pQ/zWRvzoXsEv/L10+Ki8ACOlN8SSH7NvRGSjnGsDAojASj/IhCAw1Qerv8A49I+N6t1lB4yqyjcVF9ptTymW4C9B6h1IsmogUAG48Ywl8YbUbzzwrpBe5V3H/otnsebEWmk7N8yu7Pb733BGvt8GtOFv4F13B0xO7M7kpz+EyzGFrX2e2/Lh051Uk2lF7k9p2ww1lPsqpfqSvJcLxvHLgbKK/YG155j+Fi57DjFYKo4R6UWER5D7kVAM++K635okLsxDzF5kzG9x7VQRawn80L5MObb4R3ovfJDE2nUFmRp36LJMP4tCppWHDaoHh6m2P3dOXQd+m4mIKnmQkanZ0pIfiiIQRM/85PWRfMNHQLeAC44kJLSoC915g7yLxeSJEBPh1AskDoaqRGddwEcDlAuSizLEAgugkCD5AQ8S1KH2mlL5HeqtlNcWQ7zqJNpR7TlporxuR7kGrx7M5EEPAkpxiBUWOqCQwVzF6ZutD6Czqsr7opW8KkG8t/o5xYYXUeeLBzGK+lEvzdRnUig2gTk+iAySab0h4W4WV5jwBU0=
+addons:
+  sonarcloud:
+    organization: "sytw12018" # the key of the org you chose at step #3
+    token:
+      secure: zru1ZXqsdBFQe9Jv+cuP61DpggsA+nnNPDD2ijxLokredA8Dm3/5BbszUSJNnFToXltPz0I+XRuQ0TuHDMmcY+xQfJlY7G7Uot/qI9YVndy+oE2BD73ScPq1jXE6nr8oi5kjkM4EdnXHWrrvUxaVpVjkjeoVa1vva76uE0Iu97kB3WSSxX89WKHjXNC7K3f9P6eH0UQ+VNT1XXrzKrmRuwAvfvcvaBlit5uKABPvvhvQvw3YECC9UK3MiMo5ZDiuNd+YkeVRKqTIHUiXvP/5u59invWPNitg0Z7gdkOfdELUs0VZMiVVqkVerxpADuJEtQMt3+c8g5KDNJZk0dIx7y59g2Y/tihAVD7Lpj3RMuXT/MyzoGGLLaK/S5BlQFJ5tQOrXTH9ziuEVko5B5ohEo9D5gLajxozOXvqYyA6RrrSllTwUrOBydYBpLS4uKiYD3RvIpotcbEOUVjlcOUAsyShwyEswq7A1guttrT24MEzsbn0+N/DsD0GAO0jAk+nwQj22zAfyXe7FkIq8W9RgEHidziQz86jFOF7sy6t0ck/1TXMFGaynFlYfeyZx9hDYAbtaelOCvYc2FGGwLryau1ntA1HqzyXrVfDmbGN49A7mN4wfrDi5hgfiz2auhznLe4YBl1Ed15lHlskh+nBuQ8756wxCd6HgYcq4GqnitY= # encrypted value of your token
