@@ -11,6 +11,7 @@ let app = express();
 let userRoutes = require('../routes/user');
 let offerRoutes = require('../routes/jobOffer');
 let applyRoutes = require('../routes/apply');
+let postRoutes = require('../routes/post');
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,6 +21,7 @@ app.use(expressLogging(logger));
 app.use('/api', userRoutes);
 app.use('/api', offerRoutes);
 app.use('/api', applyRoutes);
+app.use('/api', postRoutes);
 
 //Cabeceras HTTP
 app.use((req, res, next) => {

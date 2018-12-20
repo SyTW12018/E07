@@ -1,5 +1,6 @@
 let mongoose = require('mongoose');
-let PostSchema = new mongoose.Schema({
+let Schema  = mongoose.Schema;
+let PostSchema = new Schema({
 	body: {
 		type: String,
 		minlength: 10,
@@ -12,8 +13,8 @@ let PostSchema = new mongoose.Schema({
 	 },
 	creator: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref:"User"
+		ref:'User'
 	}
 });
 		
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model('Post', PostSchema);
