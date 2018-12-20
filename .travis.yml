@@ -14,7 +14,7 @@ cache:
     - ./.sonar
 script:
 - cd ../server && npm test
-- sonar-scanner -X -Dproject.settings=./sonar-project.properties
+- cd .. && sonar-scanner -X -Dproject.settings=./sonar-project.properties
 services:
 - mongodb
 notifications:
