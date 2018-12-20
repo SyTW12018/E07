@@ -13,7 +13,7 @@ cache:
     - ./client/node_modules
     - ~/.sonar
 script:
-- sonar-scanner -Dproject.settings=./sonar-project.properties
+- sonar-scanner -Dproject.settings=../sonar-project.properties
 - cd ../server && npm test
 services:
 - mongodb
