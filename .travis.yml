@@ -13,7 +13,7 @@ cache:
     - ./client/node_modules
 script:
 - cd ../server && npm test
-- sonar-scanner
+- sonar-scanner -X
 services:
 - mongodb
 notifications:
