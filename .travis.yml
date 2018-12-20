@@ -11,9 +11,10 @@ cache:
   directories:
     - ./server/node_modules
     - ./client/node_modules
+    - ./.sonar
 script:
 - cd ../server && npm test
-- sonar-scanner -X
+- sonar-scanner -X -Dproject.settings=./sonar-project.properties
 services:
 - mongodb
 notifications:
