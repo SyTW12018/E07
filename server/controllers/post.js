@@ -7,13 +7,9 @@ function addPost(req, res) {
         let newPost = new Post();
         let params = req.body;
 
-
-
-
         newPost.creator = params.creator;
         newPost.postType = params.postType;
         newPost.body = params.body;
-
 
         newPost.save((err, postSaved) => {
                 if (err) {
@@ -33,9 +29,6 @@ function addPost(req, res) {
 }
 
 function deletePost(req, res) {
-
-        let params = req.body
-
 
         Post.findOneAndDelete({ _Id: req.params.ObjectId }, (err, postDeleted) => {
 
