@@ -2,7 +2,6 @@ languaje: node_js
 node_js:
 - 'node'
 env: ENV=test
-
 install:
 - cd client
 - npm install
@@ -12,7 +11,9 @@ cache:
   directories:
     - ./server/node_modules
     - ./client/node_modules
+    - ~/.sonar
 script:
+- sonar-scanner -Dproject.settings=../sonar-project.properties
 - cd ../server && npm test
 services:
 - mongodb
@@ -20,3 +21,8 @@ notifications:
   slack:
     rooms:
       secure: Cjs81NSDyNc1qpUoRWeL3nn3AtljBqYRWXqNP7q2sgBT/Y5XQLsia+csk8rQ9kSdm4NgIEg8J1dlQLRs7GOXlgMvxf5tkR+QCzswFhvPXlg3SqI7+XWDFnwL6J6/Gm7pQ/zWRvzoXsEv/L10+Ki8ACOlN8SSH7NvRGSjnGsDAojASj/IhCAw1Qerv8A49I+N6t1lB4yqyjcVF9ptTymW4C9B6h1IsmogUAG48Ywl8YbUbzzwrpBe5V3H/otnsebEWmk7N8yu7Pb733BGvt8GtOFv4F13B0xO7M7kpz+EyzGFrX2e2/Lh051Uk2lF7k9p2ww1lPsqpfqSvJcLxvHLgbKK/YG155j+Fi57DjFYKo4R6UWER5D7kVAM++K635okLsxDzF5kzG9x7VQRawn80L5MObb4R3ovfJDE2nUFmRp36LJMP4tCppWHDaoHh6m2P3dOXQd+m4mIKnmQkanZ0pIfiiIQRM/85PWRfMNHQLeAC44kJLSoC915g7yLxeSJEBPh1AskDoaqRGddwEcDlAuSizLEAgugkCD5AQ8S1KH2mlL5HeqtlNcWQ7zqJNpR7TlporxuR7kGrx7M5EEPAkpxiBUWOqCQwVzF6ZutD6Czqsr7opW8KkG8t/o5xYYXUeeLBzGK+lEvzdRnUig2gTk+iAySab0h4W4WV5jwBU0=
+addons:
+  sonarcloud:
+    organization: "sytw12018" # the key of the org you chose at step #3
+    token:
+      secure: A5/Dsr4mB/5fd5SkcqwMdcryu7zz1tZ3J5CarE54pWanaDc4oOByGvfWIDl2OuQW3Nu6Ti3v+tJVO941dxXStux1WsLqj5CHbUS/C5FNqd7/lwV2kZ60jFlidYErE97SbPVfM8Z7vTo/KeS2EW1EMqvoUxBaGG/fc3MQFKl60LhYtqbuQZFZtO38Lx7rWkzyEwL4FU0ICBhEFfi5s/7qbumix6at6IynCtXG74ilDQH4pVWVpWex6dOop0GHrXyVBhCpRlO5sS8jnMbyDjvpmyE2w/YKr3Ob2mjZpnm3Lri12+hi8j0ZKTZN0wQV1rpGvFYJJ0I028CQTMnkn1HG13OC1u3ZEBI/EqTVuECNlRmuzllYMk74cCa8yYMnhoWoK2ai4QN4neZoVo4sE2oUYQDXG3LFR5hpcS/xtCA//i6LgyyH/byOm7sb3MfqOSXieVLOMRWfzqA8ubhXgprpLs9U3+WT1xp9n9QNafk/f3RFjjgwne4vPU4zwfp9U6Aitddg4YxoDFHKs45XcoP9y690wdzqkxXclacqU/0uEa0qVD1CCAhMbxjVYTFfw5OddIPe59Nf98/Mfcs2RWNs5z2BodEVtTwB9Rek7xHEPzpAz5m2z97n76JiTRmCtbb0+qj9J+8lXvwsoMTQTIVQxk8MSWGjQzgnXvMkR0wi7XI= # encrypted value of your token
