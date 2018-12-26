@@ -27,8 +27,7 @@ describe('Test for Offer Controller', () => {
 
         let loginInfo = {
             email: 'test@test.com',
-            password: 'test',
-            needToken: true
+            password: 'test'
         }
 
         await chai.request(server).post('/api/login')
@@ -36,7 +35,6 @@ describe('Test for Offer Controller', () => {
             .then((res) => {
                 token = res.body.token;
                 offerid = res.body.ObjectId;
-
             });
     });
 

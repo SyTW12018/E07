@@ -63,15 +63,10 @@ function loginUser(req, res) {
             else {
                 bcrypt.compare(params.password, user.password, (err, check) => {
                     if (check) {
-                        if (params.needToken) {
-                            res.status(200).send({
-                                token: jwt.createToken(user)
-                            });
-                        }
-                        else {
-                            res.status(200).send({ user });
-                        }
-
+                        res.status(200).send({
+                            token: jwt.createToken(user),
+                            user: user
+                        });
                     }
                     else {
                         res.status(200).send({ message: 'Datos de login incorrectos!' });

@@ -83,8 +83,7 @@ describe('Test for User Controller', () => {
         it('It should get the token of Test User', (done) => {
             let testUser = {
                 email: "test@test.com",
-                password: "test",
-                needToken: true
+                password: "test"
             }
             chai.request(server).post('/api/login')
                 .send(testUser)
