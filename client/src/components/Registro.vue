@@ -4,19 +4,12 @@
       <h2>Registrate ya!</h2>
       <v-alert v-model="resError" type="error" transition="scale-transition">{{alertText}}</v-alert>
       <v-alert v-model="res" type="success" transition="scale-transition">{{alertText}}</v-alert>
-      <v-text-field
-        id="text-field"
-        v-model="name"
-        :rules="nameRules"
-        :counter="10"
-        label="Nombre"
-        required
-      ></v-text-field>
+      <v-text-field id="text-field" v-model="name" :rules="nameRules" label="Nombre" required></v-text-field>
       <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
       <v-text-field
         v-model="password"
         :rules="passwordRules"
-        :counter="10"
+        :type="'password'"
         label="Contraseña"
         required
       ></v-text-field>
@@ -72,17 +65,12 @@ export default {
   data: () => ({
     valid: true,
     name: "",
-    nameRules: [
-      v => !!v || "Campo vacío.Por favor rellenelo",
-      v =>
-        (v && v.length <= 20) ||
-        "Nombre incorrecto. Debe contener menos de 20 caracteres"
-    ],
+    nameRules: [v => !!v || "Campo vacío. Por favor rellenelo"],
     email: "",
     emailRules: [
       v => !!v || "Campo vacío. Por favor rellenelo",
       v =>
-        /.+@.+/.test(v) ||
+        /[A-z0-9]+@[A-z0-9]+\.[A-z0-9]/.test(v) ||
         "No reconocemos la dirección de email. Vuelve a intentarlo."
     ],
     password: "",
@@ -95,7 +83,7 @@ export default {
   }),
 
   methods: {
-    submit: function() {
+    submit() {
       let params = {
         username: this.name,
         password: this.password,
@@ -117,6 +105,14 @@ export default {
           this.alertText = err.response.data.message;
           console.log(err.response);
         });
+    },
+    clear() {
+      this.res = false;
+      this.resError = false;
+      this.name = "";
+      this.email = "";
+      this.password = "";
+      this.checkbox = false;
     }
   }
 };
