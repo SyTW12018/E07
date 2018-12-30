@@ -41,11 +41,11 @@ function registerUser(req, res) {
             });
         }
         else {
-            res.status(200).send({ message: "Introduce una contraseña" });
+            res.status(400).send({ message: "Introduce una contraseña" });
         }
     }
     else {
-        res.status(200).send({ message: "Introduce los todos los campos" });
+        res.status(400).send({ message: "Introduce los todos los campos" });
     }
 }
 
@@ -58,18 +58,19 @@ function loginUser(req, res) {
         }
         else {
             if (!user) {
-                res.status(400).send({ message: "Usuario no registrado!" });
+                res.status(404).send({ message: "Usuario no registrado!" });
             }
             else {
                 bcrypt.compare(params.password, user.password, (err, check) => {
                     if (check) {
                         res.status(200).send({
                             token: jwt.createToken(user),
-                            user: user
+                            user: user,
+                            message: "Usuario identificado correctamente!"
                         });
                     }
                     else {
-                        res.status(200).send({ message: 'Datos de login incorrectos!' });
+                        res.status(400).send({ message: 'Datos de login incorrectos!' });
                     }
                 });
             }
