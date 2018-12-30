@@ -12,12 +12,12 @@ const chai = require('chai');
 const should = chai.should();
 
 chai.use(chaiHttp);
-describe('Test for Offer Controller', () => {
+describe('Test for offer Controller', () => {
     let token;
     let offerid;
     before(async () => {
-        await Offer.deleteMany({});
-        await User.deleteMany({});
+        //await Offer.deleteMany({});
+        //await User.deleteMany({});
         await chai.request(server).post('/api/register')
             .send({
                 username: 'test',
@@ -35,8 +35,6 @@ describe('Test for Offer Controller', () => {
             .send(loginInfo)
             .then((res) => {
                 token = res.body.token;
-                offerid = res.body.ObjectId;
-
             });
     });
 
@@ -63,6 +61,7 @@ describe('Test for Offer Controller', () => {
                     res.body.should.be.a('object');
                     res.body.should.have.property('offers');
                     res.body.should.have.property('message').eql('La oferta de trabajo se ha registrado satisfactoriamente');
+                    offerid = res.body.offers._id;
                     done();
                 });
 
@@ -72,10 +71,10 @@ describe('Test for Offer Controller', () => {
     describe('Delete Test Offer', (done) => {
         it('It should remove the test offer from database', (done) => {
             let testOfferDel = {
-
-                ObjectId: offerid
+                _id: offerid
             };
-            chai.request(server).post('/api/deleteOffer')
+
+            chai.request(server).delete('/api/deleteOffer')
                 .set({
                     "authorization": token
                 })

@@ -6,6 +6,6 @@ let middleware = require('../middlewares/authentication');
 let api = express.Router();
 
 api.post('/newOffer', middleware.auth,jobOfferController.newOffer);
-api.post('/deleteOffer', middleware.auth,jobOfferController.deleteOffer);
+api.delete('/deleteOffer', middleware.auth,jobOfferController.deleteOffer);
 
 module.exports = api;

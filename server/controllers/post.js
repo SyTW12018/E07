@@ -8,8 +8,6 @@ let Post = require('../models/post');
                 let params = req.body;
                 console.log(params);
 
-
-
                 newPost.creator = params.creator;
                 newPost.postType = params.postType;
                 newPost.body = params.body;
