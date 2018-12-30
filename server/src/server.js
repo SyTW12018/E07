@@ -3,8 +3,6 @@
 require('dotenv').config();
 
 let mongoose = require('mongoose');
-let expressLogging = require('express-logging');
-let logger = require('logops');
 let app = require('./app');
 
 let port = process.env.PORT || 8080;
@@ -12,9 +10,9 @@ let host = process.env.HOST || 'localhost';
 
 let mongoURI;
 if (process.env.ENV == 'test') {
+    console.log("ENV Mode = Test");
     mongoURI = `mongodb://localhost:27017/test`
 } else {
-    app.use(expressLogging(logger));
     let dbport = process.env.DB_PORT;
     let dbhost = process.env.DB_HOST;
     let dbname = process.env.DB_NAME;

@@ -4,6 +4,26 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let app = express();
 
+if (process.env.ENV != 'test') {
+    const addRequestId = require('express-request-id')();
+    app.use(addRequestId);
+    const morgan = require('morgan');
+    morgan.token('id', function getId(req) { return req.id });
+    let loggerFormat = ':id [:date[web]] " :method :url" :status  - :response-time ms';
+    app.use(morgan(loggerFormat, {
+        skip: (req, res) => {
+            return res.statusCode >= 400;
+        },
+        stream: process.stdout
+    }))
+    app.use(morgan(loggerFormat, {
+        skip: (req, res) => {
+            return res.statusCode < 400;
+        },
+        stream: process.stderr
+    }))
+}
+
 //Rutas
 
 let userRoutes = require('../routes/user');
