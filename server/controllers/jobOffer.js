@@ -43,32 +43,29 @@ function newOffer(req, res) {
 function deleteOffer(req, res) {
 
     Offer.findOneAndDelete({
-            _Id: req.params.ObjectId,
-        }, (err, postDeleted) => {
-            if (err) {
-                res.status(500).send({
-                    message: "Error Servidor",
-                    Error: err
+        _Id: req.params.ObjectId,
+    }, (err, offerDeleted) => {
+        if (err) {
+            res.status(500).send({
+                message: "Error Servidor",
+                Error: err
+            });
+        } else {
+            if (!offerDeleted) {
+                res.status(404).send({
+                    message: "La oferta de trabajo no existe"
                 });
             } else {
-                if (!postDeleted) {
-                    res.status(404).send({
-                        message: "La oferta de trabajo no existe"
-                    });
-                } else {
-                    res.status(200).send({
-                        message: "La oferta de trabajo se ha eliminado",
-                        Offer: postDeleted
-                    });
-                }
+                res.status(200).send({
+                    message: "La oferta de trabajo se ha eliminado",
+                    Offer: offerDeleted
+                });
             }
-
         }
 
-
+    }
 
     )
-
 
 }
 
