@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const chaiHttp = require('chai-http');
+let moment = require('moment');
 
 let Enterprise = require('../models/enterprise');
 let server = require('../src/server');
@@ -19,16 +20,17 @@ describe('Test for enterprise Controller', () => {
 
     let enterpriseId;
 
-    describe('Register Test enterprise', () => {
+    describe('Register Test enterprise', () => {;
 
         it('It should register the info of Test enterprise', (done) => {
 
             let testEnterprise = {
                 place: "Tenerife",
-                created: "13/12/1994",
+                created: moment().unix(),
                 description: "lorem ipsum"
 
             };
+
 
             chai.request(server).post('/api/newEnterprise')
                 .send(testEnterprise)
@@ -39,7 +41,6 @@ describe('Test for enterprise Controller', () => {
                     res.body.should.have.property('enterprise');
                     res.body.should.have.property('message').eql('La empresa registrada satisfactoriamente');
                     enterpriseId = res.body.enterprise._id;
-                    console.log(res.body.enterprise._id);
                     done();
 
                 });
@@ -52,8 +53,6 @@ describe('Test for enterprise Controller', () => {
             let testEnterpriseDel = {
                 _id: enterpriseId
             };
-
-            console.log(testEnterpriseDel._id);
 
             chai.request(server).delete('/api/deleteEnterprise')
                 .send(testEnterpriseDel)

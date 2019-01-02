@@ -6,6 +6,7 @@ const chaiHttp = require('chai-http');
 let User = require('../models/user');
 let Offer = require('../models/jobOffer');
 let server = require('../src/server');
+let moment = require('moment');
 
 const chai = require('chai');
 
@@ -44,7 +45,7 @@ describe('Test for offer Controller', () => {
             let testOffer = {
                 nameEnterprise: "ESL",
                 place: "COLOGNE",
-                published: "13-12-2018",
+                published: moment().unix(),
                 salary: 3000,
                 exp: "None",
                 kindOfJob: "full-time",
