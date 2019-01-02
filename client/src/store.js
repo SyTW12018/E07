@@ -1,52 +1,89 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    name: "adf",
-    surname: "",
-    username: "",
-    email: "",
-    token: ""
+    status: 'nada',
+    user: JSON.parse(localStorage.getItem('user')) || {},
+    token: localStorage.getItem('token') || ''
   },
   mutations: {
-    setName(state, payload) {
-      state.name = payload;
+    auth_request(state) {
+      state.status = 'loading'
     },
-    setSurname(state, payload) {
-      state.surname = payload;
+    auth_success(state, token, user) {
+      state.status = 'success';
+      state.token = token;
+      state.user = user;
     },
-    setUsername(state, payload) {
-      state.username = payload;
+    auth_error(state) {
+      state.status = 'error'
     },
-    setEmail(state, payload) {
-      state.email = payload;
-    },
-    setToken(state, payload) {
-      state.token = payload;
+    logout(state) {
+      state.status = '';
+      state.token = '';
+      state.user = {};
     }
   },
   actions: {
-
+    async login({ commit }, user) {
+      commit('auth_request');
+      let url = "/api/login";
+      let params = {
+        email: user.email,
+        password: user.password
+      };
+      let message;
+      let resType;
+      await axios.post(url, params).then(res => {
+        const token = res.data.token
+        const user = res.data.user
+        localStorage.setItem('token', token);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            id: res.data.user._id,
+            name: res.data.user.name,
+            surname: res.data.user.surname,
+            username: res.data.user.username,
+            email: res.data.user.email
+          })
+        );
+        axios.defaults.headers.common['Authorization'] = token;
+        commit('auth_success', token, user);
+        resType = 'success';
+        message = res.data.message;
+      })
+        .catch(err => {
+          commit('auth_error')
+          localStorage.removeItem('token')
+          resType = 'error';
+          message = err.response.data.message;
+        })
+      return { resType: resType, message: message };
+    },
+    logout({ commit }) {
+      commit('logout');
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      delete axios.defaults.headers.common['Authorization'];
+    }
   },
   getters: {
-    name(state) {
-      return state.name;
+    isLoggedIn: (state) => {
+      return !!state.token;
     },
-    surname(state) {
-      return state.surname;
+    authStatus: (state) => {
+      return state.status;
     },
-    email(state) {
-      return state.email;
+    user(state) {
+      return state.user;
     },
     token(state) {
       return state.token;
-    },
-    username(state) {
-      return state.username;
     }
-
   }
 })

@@ -3,8 +3,7 @@
     <v-form ref="form" v-model="valid" lazy-validation id="form">
       <h2>¡Te damos la bienvenida de nuevo!</h2>
       <h6>¿Te vas a perder tu siguiente gran oportunidad? Inicia sesión para estar al día de tu entorno profesional.</h6>
-      <v-alert v-model="resError" type="error" transition="scale-transition">{{alertText}}</v-alert>
-      <v-alert v-model="res" type="success" transition="scale-transition">{{alertText}}</v-alert>
+      <v-alert v-model="res" :type="resType" transition="scale-transition">{{alertText}}</v-alert>
       <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
       <v-text-field
         v-model="password"
@@ -42,49 +41,25 @@ export default {
     passwordRules: [v => !!v || "Campo vacío. Por favor rellenelo"],
     select: null,
     res: false,
-    resError: false,
-    alertText: ""
+    resType: "",
+    alertText: "prueba"
   }),
   methods: {
-    submit() {
-      let url = "/api/login";
-      let params = {
+    async submit() {
+      let data = {
         email: this.email,
         password: this.password
       };
-      this.res = false;
-      this.resError = false;
-
-      axios
-        .post(url, params)
-        .then(res => {
-          this.$store.commit("setName", res.data.user.name);
-          this.$store.commit("setSurname", res.data.user.surname);
-          this.$store.commit("setUsername", res.data.user.username);
-          this.$store.commit("setEmail", res.data.user.email);
-          this.$store.commit("setToken", res.data.token);
-          localStorage.setItem(
-            "user",
-            JSON.stringify({
-              name: res.data.user.name,
-              surname: res.data.user.surname,
-              username: res.data.user.username,
-              email: res.data.user.email
-            })
-          );
-          localStorage.setItem("token", res.data.token);
-          this.alertText = res.data.message;
-          this.res = true;
-          this.$router.push({ name: "feed" });
-        })
-        .catch(err => {
-          this.alertText = err.response.data.message;
-          this.resError = true;
-        });
+      let res = await this.$store.dispatch("login", data);
+      this.alertText = res.message;
+      this.resType = res.resType;
+      this.res = true;
+      if (res.resType == "success") {
+        this.$router.push({ name: "home" });
+      }
     },
     clear() {
-      this.res = false;
-      this.resError = false;
+      this.resType = "";
       this.email = "";
       this.password = "";
     }

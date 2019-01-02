@@ -2,8 +2,7 @@
   <v-container id="contenedor">
     <v-form ref="form" v-model="valid" lazy-validation id="form">
       <h2>Registrate ya!</h2>
-      <v-alert v-model="resError" type="error" transition="scale-transition">{{alertText}}</v-alert>
-      <v-alert v-model="res" type="success" transition="scale-transition">{{alertText}}</v-alert>
+      <v-alert v-model="res" :type="resType" transition="scale-transition">{{alertText}}</v-alert>
       <v-text-field id="text-field" v-model="name" :rules="nameRules" label="Nombre" required></v-text-field>
       <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
       <v-text-field
@@ -59,7 +58,7 @@ h2 {
 </style>
  
 <script>
-let axios = require("axios");
+import axios from "axios";
 export default {
   name: "Registro",
   data: () => ({
@@ -79,7 +78,7 @@ export default {
     checkbox: false,
     alertText: "",
     res: false,
-    resError: false
+    resType: ""
   }),
 
   methods: {
@@ -91,24 +90,22 @@ export default {
       };
       let url = `/api/register`;
       this.res = false;
-      this.resError = false;
       this.alertText = "";
       axios
         .post(url, params)
         .then(res => {
           this.res = true;
+          this.resType = "success";
           this.alertText = res.data.message;
-          console.log(res);
         })
         .catch(err => {
-          this.resError = true;
+          this.res = true;
+          this.resType = "error";
           this.alertText = err.response.data.message;
-          console.log(err.response);
         });
     },
     clear() {
       this.res = false;
-      this.resError = false;
       this.name = "";
       this.email = "";
       this.password = "";
