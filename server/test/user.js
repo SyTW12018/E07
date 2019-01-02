@@ -13,6 +13,7 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('Test for User Controller', () => {
+    let token;
     //Clear Database
     before((done) => {
         User.deleteMany({}, (err) => {
@@ -82,8 +83,7 @@ describe('Test for User Controller', () => {
         it('It should get the token of Test User', (done) => {
             let testUser = {
                 email: "test@test.com",
-                password: "test",
-                needToken: true
+                password: "test"
             }
             chai.request(server).post('/api/login')
                 .send(testUser)
@@ -91,6 +91,44 @@ describe('Test for User Controller', () => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
                     res.body.should.have.property('token');
+                    token = res.body.token;
+                    done();
+                });
+        });
+    });
+    describe('Obtención de la informacion del usuario', () => {
+        it('getUser function', (done) => {
+            chai.request(server).get('/api/user/test')
+                .set({ 'authorization': token })
+                .send({})
+                .end((error, res) => {
+                    if (error) {
+                        throw error;
+                    }
+                    else {
+                        res.body.should.be.a('Object');
+                        res.body.should.have.property('user');
+                        res.body.should.have.nested.property('user.username');
+                        res.body.should.have.nested.property('user.email');
+                        res.body.should.have.nested.property('user.name');
+                        res.body.should.have.nested.property('user.surname');
+                    }
+                    done();
+                });
+        });
+        it('getUser para un usuario que no existe', (done) => {
+            chai.request(server).get('/api/user/test2')
+                .set({ "authorization": token })
+                .send({})
+                .end((err, res) => {
+                    if (err) {
+                        throw err;
+                    }
+                    else {
+                        res.should.have.status(404)
+                        res.body.should.have.property('message');
+                        res.body.should.have.property('message').eql('No existe el usuario solicitado');
+                    }
                     done();
                 });
         });

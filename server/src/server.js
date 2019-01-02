@@ -10,6 +10,7 @@ let host = process.env.HOST || 'localhost';
 
 let mongoURI;
 if (process.env.ENV == 'test') {
+    console.log("ENV Mode = Test");
     mongoURI = `mongodb://localhost:27017/test`
 } else {
     let dbport = process.env.DB_PORT;

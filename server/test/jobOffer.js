@@ -17,8 +17,8 @@ describe('Test for offer Controller', () => {
     let token;
     let offerid;
     before(async () => {
-        //await Offer.deleteMany({});
-        //await User.deleteMany({});
+        await Offer.deleteMany({});
+        await User.deleteMany({});
         await chai.request(server).post('/api/register')
             .send({
                 username: 'test',
@@ -28,8 +28,7 @@ describe('Test for offer Controller', () => {
 
         let loginInfo = {
             email: 'test@test.com',
-            password: 'test',
-            needToken: true
+            password: 'test'
         }
 
         await chai.request(server).post('/api/login')

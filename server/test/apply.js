@@ -27,8 +27,7 @@ describe('Test for apply controllers', () => {
 
         let loginInfo = {
             email: 'test@test.com',
-            password: 'test',
-            needToken: true
+            password: 'test'
         }
 
         await chai.request(server).post('/api/login')

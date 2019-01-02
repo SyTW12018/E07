@@ -3,7 +3,7 @@
 let express = require('express');
 let PostController = require('../controllers/post');                                                                                                                                                                                                                                                                                                                                                                                                                  
 
-let mdw_auth = require('../middlewares/authentication');
+
 
 let api = express.Router();
 

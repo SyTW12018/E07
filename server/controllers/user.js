@@ -24,7 +24,7 @@ function registerUser(req, res) {
                             for (let p in err.errors) {
                                 errorMsg = err.errors[p].message;
                             }
-                            res.status(500).send({ message: errorMsg, errors: err.errors});
+                            res.status(500).send({ message: errorMsg, errors: err.errors });
                         } else {
                             res.status(500).send({ message: "Error en el servidor al guardar el usuario", err });
                         }
@@ -41,11 +41,11 @@ function registerUser(req, res) {
             });
         }
         else {
-            res.status(200).send({ message: "Introduce una contraseña" });
+            res.status(400).send({ message: "Introduce una contraseña" });
         }
     }
     else {
-        res.status(200).send({ message: "Introduce los todos los campos" });
+        res.status(400).send({ message: "Introduce los todos los campos" });
     }
 }
 
@@ -58,23 +58,19 @@ function loginUser(req, res) {
         }
         else {
             if (!user) {
-                res.status(400).send({ message: "Usuario no registrado!" });
+                res.status(404).send({ message: "Usuario no registrado!" });
             }
             else {
                 bcrypt.compare(params.password, user.password, (err, check) => {
                     if (check) {
-                        if (params.needToken) {
-                            res.status(200).send({
-                                token: jwt.createToken(user)
-                            });
-                        }
-                        else {
-                            res.status(200).send({ user });
-                        }
-
+                        res.status(200).send({
+                            token: jwt.createToken(user),
+                            user: user,
+                            message: "Usuario identificado correctamente!"
+                        });
                     }
                     else {
-                        res.status(200).send({ message: 'Datos de login incorrectos!' });
+                        res.status(400).send({ message: 'Datos de login incorrectos!' });
                     }
                 });
             }
@@ -82,4 +78,20 @@ function loginUser(req, res) {
     });
 }
 
-module.exports = { registerUser, loginUser };
+function getUser(req, res) {
+    let username = req.params.username;
+    User.findOne({ username: username }, (err, user) => {
+        if (err) {
+            res.status(500).send({ message: "Error en el servidor obteniendo la informacion del usuario" });
+        }
+        else {
+            if (!user) {
+                res.status(404).send({ message: "No existe el usuario solicitado" });
+            }
+            else {
+                res.status(200).send({ user: user });
+            }
+        }
+    });
+}
+module.exports = { registerUser, loginUser, getUser };
