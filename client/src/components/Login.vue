@@ -25,7 +25,6 @@ h6 {
 </style>
  
 <script>
-import axios from "axios";
 export default {
   name: "Login",
   data: () => ({

@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    status: 'nada',
+    status: '',
     user: JSON.parse(localStorage.getItem('user')) || {},
     token: localStorage.getItem('token') || ''
   },
@@ -14,7 +14,7 @@ export default new Vuex.Store({
     auth_request(state) {
       state.status = 'loading'
     },
-    auth_success(state, token, user) {
+    auth_success(state, { token, user }) {
       state.status = 'success';
       state.token = token;
       state.user = user;
@@ -53,7 +53,7 @@ export default new Vuex.Store({
           })
         );
         axios.defaults.headers.common['Authorization'] = token;
-        commit('auth_success', token, user);
+        commit('auth_success', { token, user });
         resType = 'success';
         message = res.data.message;
       })
@@ -70,6 +70,43 @@ export default new Vuex.Store({
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       delete axios.defaults.headers.common['Authorization'];
+    },
+    async updateInfo({ commit }, update) {
+      commit('auth_request');
+      let resType;
+      let message;
+      await axios
+        .put("/api/updateUser", update)
+        .then(res => {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          delete axios.defaults.headers.common['Authorization'];
+          const token = res.data.token
+          const user = res.data.user
+          localStorage.setItem('token', token);
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              id: res.data.user._id,
+              name: res.data.user.name,
+              surname: res.data.user.surname,
+              username: res.data.user.username,
+              email: res.data.user.email
+            })
+          );
+          axios.defaults.headers.common['Authorization'] = token;
+          commit('auth_success', { token, user });
+          resType = 'success';
+          message = res.data.message;
+        })
+        .catch(err => {
+          commit('auth_error')
+          resType = 'error';
+          message = err.response.data.message;
+        })
+
+      return { resType: resType, message: message };
+
     }
   },
   getters: {

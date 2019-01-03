@@ -5,7 +5,7 @@ require('dotenv').config();
 let mongoose = require('mongoose');
 let app = require('./app');
 
-let port = process.env.PORT || 8080;
+let port = process.env.PORT || 4500;
 let host = process.env.HOST || 'localhost';
 
 let mongoURI;

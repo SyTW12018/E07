@@ -7,7 +7,7 @@
     <v-toolbar-items v-if="isLoggedIn" class="menu">
       <v-btn class="white--text" flat router-link to="/home">Muro</v-btn>
       <v-btn class="white--text" flat router-link to="/registro">Trabajos</v-btn>
-      <v-btn class="white--text" flat router-link to="/login">Cuenta</v-btn>
+      <v-btn class="white--text" flat router-link to="/account">Cuenta</v-btn>
       <v-btn class="white--text" flat @click="logout">Desconectarse</v-btn>
     </v-toolbar-items>
     <v-toolbar-items v-else class="menu">

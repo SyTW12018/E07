@@ -94,4 +94,39 @@ function getUser(req, res) {
         }
     });
 }
-module.exports = { registerUser, loginUser, getUser };
+
+function updateUser(req, res) {
+    let params = req.body;
+    if (params.password) {
+        User.findOne({ email: params.email }, (err, user) => {
+            bcrypt.compare(params.password, user.password, (errbcrypt, check) => {
+                if (check) {
+                    let update = {}
+                    if (params.newPassword) {
+                        bcrypt.hash(params.newPassword, null, null, (hasherr, hash) => {
+                            update.password = hash;
+                        })
+                    }
+                    if (params.name) update.name = params.name;
+                    if (params.surname) update.surname = params.surname;
+                    if (params.newEmail) update.email = params.newEmail;
+                    User.findOneAndUpdate({ email: params.email }, update, { new: true }, (err, updatedUser) => {
+                        if (err) {
+                            res.status(500).send({ message: "Error al actualizar el usuario" });
+                        }
+                        else {
+                            res.status(200).send({ token: jwt.createToken(updatedUser), user: updatedUser, message: "Usuario Actualizado Correctamente" });
+                        }
+                    });
+                }
+                else {
+                    res.status(400).send({ message: "Contraseña erronea" });
+                }
+            })
+        })
+    }
+    else {
+        res.status(400).send({ message: "Contraseña no especificada" });
+    }
+}
+module.exports = { registerUser, loginUser, getUser, updateUser };
