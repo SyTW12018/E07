@@ -25,7 +25,6 @@ function addPost(req, res) {
                 }
 
         });
-
 }
 
 function deletePost(req, res) {
@@ -44,7 +43,6 @@ function deletePost(req, res) {
                         }
                 }
         });
-
 }
 
 module.exports = { addPost, deletePost };

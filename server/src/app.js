@@ -29,6 +29,7 @@ if (process.env.ENV != 'test') {
 let userRoutes = require('../routes/user');
 let offerRoutes = require('../routes/jobOffer');
 let applyRoutes = require('../routes/apply');
+let enterpriseRoutes = require('../routes/enterprise');
 let postRoutes = require('../routes/post');
 
 
@@ -38,6 +39,7 @@ app.use(bodyParser.json());
 app.use('/api', userRoutes);
 app.use('/api', offerRoutes);
 app.use('/api', applyRoutes);
+app.use('/api', enterpriseRoutes);
 app.use('/api', postRoutes);
 
 //Cabeceras HTTP

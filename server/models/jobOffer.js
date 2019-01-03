@@ -1,18 +1,19 @@
 'use strict'
 
 let mongoose = require('mongoose');
+
 let Schema = mongoose.Schema;
 
 let jobOfferSchema = new Schema({
 
-    nameEnterprise: String,
+    nameEnter: { type: mongoose.Schema.Types.ObjectId, ref: 'enterprise' },
     place: String,
-    published: String,
+    published: Number,
     salary: Number,
     exp: String,
     kindOfJob: String,
     description: String
-    
+
 
 });
 
