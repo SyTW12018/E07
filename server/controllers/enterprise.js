@@ -66,8 +66,26 @@ function deleteEnterprise(req, res) {
 
 }
 
+function getEnterprise(req, res) {
+    let params = req.params;
+    Enterprise.findOne({ nameEnterprise: params.name }, (err, enterprise) => {
+        if (err) {
+            res.status(500).send({ message: "Error en el servidor" });
+        }
+        else {
+            if (!enterprise) {
+                res.status(404).send({ message: "Empresa no encontrada" });
+            }
+            else {
+                res.status(200).send({ enterprise });
+            }
+        }
+    })
+}
+
 module.exports = {
     newEnterprise,
-    deleteEnterprise
+    deleteEnterprise,
+    getEnterprise
 };
 
