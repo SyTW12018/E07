@@ -39,7 +39,6 @@ function newOffer(req, res) {
 
 }
 
-
 function deleteOffer(req, res) {
 
     Offer.findOneAndDelete({
@@ -69,7 +68,50 @@ function deleteOffer(req, res) {
 
 }
 
+function getOffer(req,res){
+  let params = req.params;
+  Offer.findById(params.id,(err, offer)=>{
+      if(err){
+          res.status(500).send({message: "Error en el servidor"});
+
+      }
+      else{
+          if(!offer){
+              res.status(404).send({message:"Oferta no existe"});
+          }
+          else{
+              res.status(200).send({offer});
+          }
+      }
+  })
+
+}
+
+function getAllOffers(req,res){
+ 
+    Offer.find({},(err,offers)=>{
+        if(err){
+            res.status(500).send({message:"Error en el servidor"});
+        }
+        else{
+            if(!offers){
+                res.status(200).send({message:"No hay ofertas registradas"});
+            }
+            else{
+                res.status(200).send({message:"Ofertas encontradas",offers:offers})
+            }
+        }
+    })
+
+
+}
+
+
+
 module.exports = {
     newOffer,
-    deleteOffer
+    deleteOffer,
+    getOffer,
+    getAllOffers
+    
 };
