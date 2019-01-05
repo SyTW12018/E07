@@ -100,6 +100,7 @@ export default new Vuex.Store({
           message = res.data.message;
         })
         .catch(err => {
+          console.log(err);
           commit('auth_error')
           resType = 'error';
           message = err.response.data.message;

@@ -19,6 +19,7 @@ Vue.prototype.$http.interceptors.response.use(undefined, (err) => {
     store.dispatch('logout');
     router.push({ name: 'Login' });
   }
+  throw err;
 });
 
 new Vue({
