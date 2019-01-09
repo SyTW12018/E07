@@ -16,6 +16,7 @@ chai.use(chaiHttp);
 describe('Test for offer Controller', () => {
     let token;
     let offerid;
+    let enterpriseid;
     before(async () => {
         await Offer.deleteMany({});
         await User.deleteMany({});
@@ -36,14 +37,23 @@ describe('Test for offer Controller', () => {
             .then((res) => {
                 token = res.body.token;
             });
+
+        await chai.request(server).post('/api/newEnterprise')
+            .set({ "authorization": token }).send({
+                nameEnterprise: "test",
+                place: "Test Land",
+                description: "Lorem ipsum"
+            }).then((res) => {
+                enterpriseid = res.body.enterprise._id;
+            })
     });
 
     describe('Register Test Offer', () => {
         it('It should register the info of Test Offer', (done) => {
 
             let testOffer = {
-                nameEnterprise: "ESL",
-                place: "COLOGNE",
+                enterprise: enterpriseid,
+                place: "test",
                 published: moment().unix(),
                 salary: 3000,
                 exp: "None",

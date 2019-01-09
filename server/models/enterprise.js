@@ -9,8 +9,7 @@ let enterpriseSchema = new Schema({
     nameEnterprise: String,
     place: String,
     created: Number,
-    description: String,
-    role: String
+    description: String
 
 });
 

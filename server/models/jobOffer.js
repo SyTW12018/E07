@@ -6,7 +6,7 @@ let Schema = mongoose.Schema;
 
 let jobOfferSchema = new Schema({
 
-    nameEnter: { type: mongoose.Schema.Types.ObjectId, ref: 'enterprise' },
+    enterprise: { type: mongoose.Schema.Types.ObjectId, ref: 'enterprise' },
     place: String,
     published: Number,
     salary: Number,

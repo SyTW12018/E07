@@ -1,6 +1,8 @@
 'use strict'
 
+let moment = require('moment');
 let Enterprise = require('../models/enterprise');
+
 
 function newEnterprise(req, res) {
 
@@ -9,9 +11,8 @@ function newEnterprise(req, res) {
 
     newEnterprise.nameEnterprise = params.nameEnterprise;
     newEnterprise.place = params.place;
-    newEnterprise.created = params.created;
+    newEnterprise.created = moment().unix();
     newEnterprise.description = params.description;
-    newEnterprise.role = 'ROLE_ENTERPRISE'
 
     newEnterprise.save((err, enterpriseSaved) => {
         if (err) {
