@@ -4,6 +4,7 @@ import Home from './views/Home'
 import Login from './views/Login'
 import Registro from './views/Registro'
 import Account from './views/Account'
+import EnterpriseProfile from './views/EnterpriseProfile'
 
 Vue.use(Router)
 
@@ -35,6 +36,14 @@ let router = new Router({
       path: '/account',
       name: 'Account',
       component: Account,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/business/:name',
+      name: 'Enterprise',
+      component: EnterpriseProfile,
       meta: {
         requiresAuth: true
       }
