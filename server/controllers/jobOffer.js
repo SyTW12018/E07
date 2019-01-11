@@ -106,12 +106,29 @@ function getAllOffers(req, res) {
 
 }
 
+function getOffersOfEnterprise(req, res) {
+    let params = req.params;
+    Offer.find({ enterprise: params.id }, (err, offers) => {
+        if (err) {
+            res.status(500).send({ message: "Error en el servidor" });
+        }
+        else {
+            if (!offers) {
+                res.status(200).send({ message: "No existen ofertas de esta empresa" });
+            }
+            else {
+                res.status(200).send({ offers });
+            }
+        }
+    })
+}
 
 
 module.exports = {
     newOffer,
     deleteOffer,
     getOffer,
-    getAllOffers
+    getAllOffers,
+    getOffersOfEnterprise
 
 };
