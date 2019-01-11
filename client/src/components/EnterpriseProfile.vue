@@ -46,7 +46,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 export default {
   name: "EnterpriseProfile",
   props: {
@@ -58,7 +57,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped>
 .m-3 {
