@@ -7,6 +7,7 @@ import Account from './views/Account'
 import Enterprise from './views/Enterprise'
 import EnterpriseProfile from './components/EnterpriseProfile'
 import EnterpriseJobs from './components/EnterpriseJobs'
+import Jobs from './views/Jobs'
 
 Vue.use(Router)
 
@@ -53,6 +54,14 @@ let router = new Router({
         { path: "", component: EnterpriseProfile },
         { path: "jobs", component: EnterpriseJobs, props: true }
       ]
+    },
+    {
+      path: '/jobs',
+      name: 'Jobs',
+      component: Jobs,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })

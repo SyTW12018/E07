@@ -1,7 +1,7 @@
 'use strict'
 
 let mongoose = require('mongoose');
-
+let mongoosePaginate = require('mongoose-paginate');
 let Schema = mongoose.Schema;
 
 let jobOfferSchema = new Schema({
@@ -16,5 +16,7 @@ let jobOfferSchema = new Schema({
 
 
 });
+
+jobOfferSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('jobOffer', jobOfferSchema);

@@ -88,17 +88,23 @@ function getOffer(req, res) {
 }
 
 function getAllOffers(req, res) {
+    let params = req.params;
+    let options = {
+        page: Number(params.page),
+        limit: 3,
+        populate: 'enterprise'
 
-    Offer.find({}).populate('enterprise').exec((err, offers) => {
+    }
+    Offer.paginate({}, options, (err, result) => {
         if (err) {
             res.status(500).send({ message: "Error en el servidor" });
         }
         else {
-            if (!offers) {
+            if (!result.total) {
                 res.status(200).send({ message: "No hay ofertas registradas" });
             }
             else {
-                res.status(200).send({ message: "Ofertas encontradas", offers: offers })
+                res.status(200).send({ message: "Ofertas encontradas", offers: result.docs, total: result.total })
             }
         }
     })
