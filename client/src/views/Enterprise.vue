@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar/>
     <div v-if="!this.id">
       <v-container fluid>
         <v-layout align-center justify-center>
@@ -16,14 +15,11 @@
       :description="this.description"
       :loading="this.loading"
     ></router-view>
-    <Footer/>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 export default {
   data: () => ({
     id: "",
@@ -59,15 +55,7 @@ export default {
     }
   },
   async mounted() {
-    let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-    await wait(2000).then(async () => {
-      await this.info();
-    });
-  },
-
-  components: {
-    Navbar,
-    Footer
+    await this.info();
   }
 };
 </script>

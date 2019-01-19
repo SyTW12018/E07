@@ -1,59 +1,49 @@
 <template>
-  <v-container id="contenedor">
-    <v-form ref="form" v-model="valid" lazy-validation id="form">
-      <h2>Registrate ya!</h2>
-      <v-alert v-model="res" :type="resType" transition="scale-transition">{{alertText}}</v-alert>
-      <v-text-field id="text-field" v-model="name" :rules="nameRules" label="Nombre" required></v-text-field>
-      <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-      <v-text-field
-        v-model="password"
-        :rules="passwordRules"
-        :type="'password'"
-        label="Contraseña"
-        required
-      ></v-text-field>
-      <v-checkbox
-        v-model="checkbox"
-        :rules="[v => !!v ||'']"
-        label="Al hacer clic en unirte, aceptas las Condiciones de uso, la Política de privacidad y la Política de cookies de GamerIn."
-        required
-      ></v-checkbox>
-      <v-btn :disabled="!valid" @click="submit">Unete ahora</v-btn>
-      <v-btn @click="clear">Borrar</v-btn>
-    </v-form>
+  <v-container fluid>
+    <v-layout row justify-center align-center class="h100vh">
+      <v-flex xs12 md8 class="form-bg text-xs-center">
+        <v-flex xs10 offset-xs1>
+          <v-form ref="form" v-model="valid" lazy-validation>
+            <v-flex class="text-xs-center">
+              <h2>Registrate ya!</h2>
+            </v-flex>
+            <v-alert v-model="res" :type="resType" transition="scale-transition">{{alertText}}</v-alert>
+            <v-text-field id="text-field" v-model="name" :rules="nameRules" label="Nombre" required></v-text-field>
+            <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+            <v-text-field
+              v-model="password"
+              :rules="passwordRules"
+              :type="'password'"
+              label="Contraseña"
+              required
+            ></v-text-field>
+            <v-checkbox
+              v-model="checkbox"
+              :rules="[v => !!v ||'']"
+              label="Al hacer clic en unirte, aceptas las Condiciones de uso, la Política de privacidad y la Política de cookies de GamerIn."
+              required
+            ></v-checkbox>
+            <v-btn :disabled="!valid" @click="submit">Unete ahora</v-btn>
+            <v-btn @click="clear">Borrar</v-btn>
+          </v-form>
+        </v-flex>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
  
-<style>
-#contenedor {
-  src: "logo.png";
-  max-width: 100%;
-  padding-top: 500px;
-  background-color: rgba(235, 233, 249, 1);
-}
-
+<style scoped>
 h2 {
   font-size: 30px;
   font-family: "Avenir";
-  padding-top: -30px;
 }
-
-#form {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 570px;
-  margin-left: -300px;
-  margin-top: -230px;
-  padding-left: 100px;
-  padding-right: 100px;
-  padding-bottom: -100px;
+.form-bg {
   font-family: "Avenir";
   background: rgba(183, 222, 237, 1);
 }
 
-#text-field {
-  padding-top: -35px;
+.h100vh {
+  height: 100vh;
 }
 </style>
  

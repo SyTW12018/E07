@@ -1,43 +1,67 @@
 <template>
   <div>
-    <div v-if="this.loading">
-      <v-container fluid>
-        <v-layout align-center justify-center>
+    <v-container fluid>
+      <template v-if="this.loading">
+        <v-layout row justify-center>
           <v-progress-circular indeterminate color="blue"></v-progress-circular>
         </v-layout>
-      </v-container>
-    </div>
-    <div v-else>
-      <v-card v-for="offer in offers">
-        <v-card-text>
-          <v-layout row align-center>
-            <v-layout column xs1>
-              <v-img max-height="50" contain src="https://www.w3schools.com/w3images/avatar2.png"></v-img>
-            </v-layout>
-            <v-layout column xs11>
-              <h3 class="headline">{{offer.enterprise.nameEnterprise}}</h3>
-              <div>
-                <p>
-                  Lugar: {{offer.place}}
-                  <br>
-                  Experiencia Necesaria: {{offer.exp}}
-                  <br>
-                  Tipo de trabajo: {{offer.kindOfJob}}
-                  <br>
-                  Salario: {{offer.salary}} €
-                </p>
-              </div>
-            </v-layout>
+      </template>
+      <template v-else>
+        <v-layout column>
+          <v-layout row justify-center>
+            <v-flex class="text-xs-center pb-2" xs12>
+              <h1>Ofertas de Trabajo Disponibles!</h1>
+            </v-flex>
           </v-layout>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn class="a" @click="apply(offer._id)" flat color="blue">Apúntate</v-btn>
-        </v-card-actions>
-      </v-card>
-    </div>
-    <div class="text-xs-center mt-2">
-      <v-pagination id="paginator" v-model="page" :length="this.pages" @input="next"></v-pagination>
-    </div>
+          <v-divider></v-divider>
+          <v-layout row justify-center class="pb-2 pt-2 mt-2 mb-2">
+            <v-flex xs8 lg5>
+              <v-card v-for="offer in offers" class="card">
+                <v-card-text>
+                  <v-layout row align-center>
+                    <v-layout column xs1>
+                      <v-img
+                        max-height="50"
+                        contain
+                        src="https://www.w3schools.com/w3images/avatar2.png"
+                      ></v-img>
+                    </v-layout>
+                    <v-layout column xs11>
+                      <router-link
+                        class="router-link"
+                        :to="`/business/${offer.enterprise.nameEnterprise}`"
+                      >
+                        <h3 class="headline">{{offer.enterprise.nameEnterprise}}</h3>
+                      </router-link>
+                      <div>
+                        <p>
+                          Lugar: {{offer.place}}
+                          <br>
+                          Experiencia Necesaria: {{offer.exp}}
+                          <br>
+                          Tipo de trabajo: {{offer.kindOfJob}}
+                          <br>
+                          Salario: {{offer.salary}} €
+                        </p>
+                      </div>
+                    </v-layout>
+                  </v-layout>
+                </v-card-text>
+                <v-card-actions>
+                  <v-btn class="a" @click="apply(offer._id)" flat color="blue">Apúntate</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-flex>
+          </v-layout>
+          <v-divider></v-divider>
+          <v-layout row justify-center>
+            <v-flex class="text-xs-center mt-2" xs12>
+              <v-pagination v-model="page" :length="this.pages" @input="next"></v-pagination>
+            </v-flex>
+          </v-layout>
+        </v-layout>
+      </template>
+    </v-container>
     <v-snackbar
       v-model="snackbar"
       :color="color"
@@ -61,15 +85,15 @@ export default {
     snackbar: false,
     snackbarText: ""
   }),
-  mounted() {
-    this.getPage(1);
+  async mounted() {
+    await this.getPage(1);
   },
   methods: {
     async next() {
       this.loading = true;
       this.getPage(this.page);
     },
-    getPage(page) {
+    async getPage(page) {
       let url = `/api/jobOffers/${page}`;
       console.log(url);
       axios
@@ -88,10 +112,11 @@ export default {
         });
     },
     apply(offerid) {
+      console.log(this.$store.getters.user);
       let params = {
         description: "test",
         offerid: offerid,
-        userid: this.$store.getters.user.id
+        userid: this.$store.getters.user._id
       };
       console.log(params);
       axios
@@ -111,4 +136,10 @@ export default {
 };
 </script>
 <style scoped>
+.card {
+  margin-bottom: 3px;
+}
+.router-link {
+  text-decoration: none;
+}
 </style>

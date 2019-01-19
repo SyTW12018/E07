@@ -45,7 +45,7 @@ export default new Vuex.Store({
         localStorage.setItem(
           "user",
           JSON.stringify({
-            id: res.data.user._id,
+            _id: res.data.user._id,
             name: res.data.user.name,
             surname: res.data.user.surname,
             username: res.data.user.username,
@@ -87,7 +87,7 @@ export default new Vuex.Store({
           localStorage.setItem(
             "user",
             JSON.stringify({
-              id: res.data.user._id,
+              _id: res.data.user._id,
               name: res.data.user.name,
               surname: res.data.user.surname,
               username: res.data.user.username,

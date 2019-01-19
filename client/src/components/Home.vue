@@ -1,41 +1,24 @@
 <template>
-  <v-parallax
-    dark
-    src="http://www.e-sportsmag.com/wp-content/uploads/2017/12/esports-2018-torneos.jpg"
-    height="550"
-  >
-    <v-layout align-center column justify-center>
-      <v-container fluid>
-        <v-layout justify-space-around>
-          <v-flex xs5>
-            <v-img src="logo" aspect-ratio="1.7"></v-img>
-          </v-flex>
-        </v-layout>
-      </v-container>
-      <h1 class="display-2 font-weight-thin mb-3">Bienvenido</h1>
-      <h3>¿Eres nuevo en GamerIn?
-        <router-link to="/registro">Únete ahora</router-link>
-      </h3>
-      <router-view></router-view>
+  <v-parallax class="h100vh" dark src="https://www.media-tics.com/fotos/8/esports.jpg" height>
+    <v-layout column align-center justify-center>
+      <div class="text-xs-center">
+        <h1 class="black--text display-2 font-weight-thin mb-3">Bienvenido</h1>
+        <h3 class="black--text subheading">¿Eres nuevo en GamerIn?
+          <router-link to="/registro">Únete ahora</router-link>
+        </h3>
+      </div>
     </v-layout>
   </v-parallax>
 </template>
 
 <script>
 export default {
-  name: "Home",
-  data: () => ({})
+  name: "Home"
 };
 </script>
  
 <style scoped>
-h1 {
-  color: black;
-  padding-top: 400px;
-}
-
-h3 {
-  color: black;
-  padding-bottom: 1000px;
+.h100vh {
+  height: 100vh;
 }
 </style>

@@ -1,24 +1,40 @@
 <template>
-  <v-container id="contenedor">
-    <v-form ref="form" v-model="valid" lazy-validation id="form">
-      <h2>
-        <v-icon class="mr">build</v-icon>Configuración de Cuenta!
-      </h2>
-      <span>{{newEmail}}</span>
-      <v-alert v-model="res" :type="resType" transition="scale-transition">{{alertText}}</v-alert>
-      <v-text-field v-model="newName" :placeholder="name" :value="name" label="Nombre"></v-text-field>
-      <v-text-field v-model="newSurname" :placeholder="surname" :value="surname" label="Apellidos"></v-text-field>
-      <v-text-field v-model="newEmail" :placeholder="email" :rules="emailRules" label="E-mail"></v-text-field>
-      <v-text-field v-model="newPassword" :type="'password'" label="Nueva Contraseña"></v-text-field>
-      <v-text-field
-        v-model="oldPassword"
-        :rules="passwordRules"
-        :type="'password'"
-        label="Contraseña Actual"
-        required
-      ></v-text-field>
-      <v-btn :disabled="!valid" @click="submit">Actualizar</v-btn>
-    </v-form>
+  <v-container fluid>
+    <v-layout row justify-center align-center class="h100vh">
+      <v-flex xs12 md8 class="form-bg text-xs-center">
+        <v-flex xs10 offset-xs1>
+          <v-form ref="form" v-model="valid" lazy-validation id="form">
+            <h2>
+              <v-icon class="mr">settings</v-icon>Configuración de Cuenta!
+            </h2>
+            <span>{{newEmail}}</span>
+            <v-alert v-model="res" :type="resType" transition="scale-transition">{{alertText}}</v-alert>
+            <v-text-field v-model="newName" :placeholder="name" :value="name" label="Nombre"></v-text-field>
+            <v-text-field
+              v-model="newSurname"
+              :placeholder="surname"
+              :value="surname"
+              label="Apellidos"
+            ></v-text-field>
+            <v-text-field
+              v-model="newEmail"
+              :placeholder="email"
+              :rules="emailRules"
+              label="E-mail"
+            ></v-text-field>
+            <v-text-field v-model="newPassword" :type="'password'" label="Nueva Contraseña"></v-text-field>
+            <v-text-field
+              v-model="oldPassword"
+              :rules="passwordRules"
+              :type="'password'"
+              label="Contraseña Actual"
+              required
+            ></v-text-field>
+            <v-btn :disabled="!valid" @click="submit">Actualizar</v-btn>
+          </v-form>
+        </v-flex>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 <script>
@@ -81,5 +97,18 @@ export default {
 <style scoped>
 .mr {
   margin-right: 10px;
+}
+
+h2 {
+  font-size: 30px;
+  font-family: "Avenir";
+}
+.form-bg {
+  font-family: "Avenir";
+  background: rgba(183, 222, 237, 1);
+}
+
+.h100vh {
+  height: 100vh;
 }
 </style>

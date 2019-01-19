@@ -7,7 +7,9 @@
             <v-img max-height="50" contain src="https://www.w3schools.com/w3images/avatar2.png"></v-img>
           </v-layout>
           <v-layout column xs11>
-            <h3 class="headline">{{enterprise}}</h3>
+            <router-link class="router-link" :to="`/business/${enterprise}`">
+              <h3 class="headline">{{enterprise}}</h3>
+            </router-link>
             <div>
               <p>
                 Lugar: {{offer.place}}
@@ -88,10 +90,11 @@ export default {
         });
     },
     apply(offerid) {
+      console.log(this.$store.getters.user);
       let params = {
         description: "test",
         offerid: offerid,
-        userid: this.$store.getters.user.id
+        userid: this.$store.getters.user._id
       };
       console.log(params);
       axios
@@ -117,5 +120,8 @@ export default {
 }
 .a {
   margin-left: auto;
+}
+.router-link {
+  text-decoration: none;
 }
 </style>
