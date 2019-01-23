@@ -1,6 +1,5 @@
 'use strict'
 
-const mongoose = require('mongoose');
 const chaiHttp = require('chai-http');
 
 let Enterprise = require('../models/enterprise');
@@ -39,7 +38,7 @@ describe('Test for enterprise Controller', () => {
     describe('Register Test enterprise', () => {
         it('It should register the info of Test enterprise', (done) => {
             let testEnterprise = {
-                nameEnterprice: "Test",
+                nameEnterprise: "Test",
                 place: "TestLand",
                 description: "lorem ipsum"
             };
@@ -47,7 +46,6 @@ describe('Test for enterprise Controller', () => {
                 .set({ "authorization": token })
                 .send(testEnterprise)
                 .end((err, res) => {
-
                     res.should.have.status(201);
                     res.body.should.be.a('object');
                     res.body.should.have.property('enterprise');

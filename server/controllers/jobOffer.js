@@ -101,7 +101,7 @@ function getAllOffers(req, res) {
         }
         else {
             if (!result.total) {
-                res.status(200).send({ message: "No hay ofertas registradas" });
+                res.status(404).send({ message: "Esta empresa no dispone actualmente de ofertas de trabajo" });
             }
             else {
                 res.status(200).send({ message: "Ofertas encontradas", offers: result.docs, total: result.total })

@@ -1,6 +1,5 @@
 'use strict'
 
-const mongoose = require('mongoose');
 const chaiHttp = require('chai-http');
 
 let User = require('../models/user');

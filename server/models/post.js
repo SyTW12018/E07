@@ -1,20 +1,23 @@
 let mongoose = require('mongoose');
-let Schema  = mongoose.Schema;
+let mongoosePaginate = require('mongoose-paginate');
+let Schema = mongoose.Schema;
 let PostSchema = new Schema({
 	body: {
-		type: String,
-		minlength: 10,
-		maxlength: 260
-	},
-	createAt: Date ,
-	postType: {
-		required: true,
 		type: String
-	 },
+	},
+	createAt: Number,
 	creator: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref:'User'
+		required: true,
+		refPath: 'onModel'
+	},
+	onModel: {
+		type: String,
+		required: true,
 	}
+
 });
-		
+
+PostSchema.plugin(mongoosePaginate);
+
 module.exports = mongoose.model('Post', PostSchema);

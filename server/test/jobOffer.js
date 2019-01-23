@@ -1,6 +1,5 @@
 'use strict'
 
-const mongoose = require('mongoose');
 const chaiHttp = require('chai-http');
 
 let User = require('../models/user');
@@ -50,7 +49,6 @@ describe('Test for offer Controller', () => {
 
     describe('Register Test Offer', () => {
         it('It should register the info of Test Offer', (done) => {
-
             let testOffer = {
                 enterprise: enterpriseid,
                 place: "test",

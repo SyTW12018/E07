@@ -8,7 +8,6 @@ function newEnterprise(req, res) {
 
     let newEnterprise = new Enterprise();
     let params = req.body;
-
     newEnterprise.nameEnterprise = params.nameEnterprise;
     newEnterprise.place = params.place;
     newEnterprise.created = moment().unix();

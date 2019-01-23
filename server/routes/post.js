@@ -1,13 +1,15 @@
 'use strict'
 
 let express = require('express');
-let PostController = require('../controllers/post');                                                                                                                                                                                                                                                                                                                                                                                                                  
-
+let PostController = require('../controllers/post');
+let auth = require('../middlewares/authentication');
 
 
 let api = express.Router();
 
-api.post('/addPost', PostController.addPost);
-api.post('/deletePost',PostController.deletePost);
+api.post('/addPost', auth.auth, PostController.addPost);
+api.post('/deletePost', auth.auth, PostController.deletePost);
+api.get('/posts', auth.auth, PostController.getAllPosts);
+api.get('/posts/:id/:page', auth.auth, PostController.getPostsOfUser);
 
 module.exports = api;
