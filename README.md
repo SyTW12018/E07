@@ -1,6 +1,8 @@
 # GamerIn
 GamerIn es una red social orientada a la búsqueda de trabajo en el sector de los eSports. La aplicacion permitirá revisar ofertas de trabajo de distintas empresas y responder a ellas a través de un formulario.
 
+![Travis Build Status](https://travis-ci.org/SyTW12018/E07.svg?branch=master)
+
 # Planificación
 La planificación es una parte importante de un desarrollo de una aplicación, puesto que determinará los objetivos y funcionalidades a desarrollar. Ésto nos permitirá determinar cuando nuestra aplicación estará lista y finalizada.
 
@@ -8,7 +10,6 @@ La planificación es una parte importante de un desarrollo de una aplicación, p
 - Permitir la conexión de usuario
     - Registro de nuevos usuario
     - Login de usuarios
-    - Login de empresas
 
 - Permitir cambiar la informacion del usuario
     - Cambiar contraseña
@@ -22,8 +23,6 @@ La planificación es una parte importante de un desarrollo de una aplicación, p
     - Generar nuevas publicaciones
 
 - Ofertas de empleo
-    - Añadir nuevas ofertas
-    - Borrar ofertas
     - Contactar para oferta
 
 
