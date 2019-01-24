@@ -50,7 +50,8 @@ function getAllPosts(req, res) {
         let options = {
                 page: Number(params.page),
                 limit: 7,
-                populate: 'creator'
+                populate: 'creator',
+                sort: { createAt: -1 }
         }
         Post.paginate({}, options, (err, result) => {
                 let docs = result.docs.map((curr) => {
@@ -96,8 +97,8 @@ function getPostsOfUser(req, res) {
         let options = {
                 page: params.page,
                 limit: 7,
-                populate: 'creator'
-
+                populate: 'creator',
+                sort: { createAt: -1 }
         }
         Post.paginate({ creator: params.id }, options, (err, result) => {
                 let docs = result.docs.map((curr) => {

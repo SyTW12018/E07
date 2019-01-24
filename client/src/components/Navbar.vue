@@ -48,7 +48,7 @@
       </router-link>
       <v-spacer></v-spacer>
       <v-toolbar-items v-if="isLoggedIn" class="menu hidden-sm-and-down">
-        <v-btn class="white--text" flat router-link to="/home">Muro</v-btn>
+        <v-btn class="white--text" flat router-link to="/feed">Muro</v-btn>
         <v-btn class="white--text" flat router-link to="/jobs">Trabajos</v-btn>
         <v-btn class="white--text" flat router-link to="/account">Cuenta</v-btn>
         <v-btn class="white--text" flat @click="logout">Desconectarse</v-btn>

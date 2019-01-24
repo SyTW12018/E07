@@ -80,6 +80,7 @@ export default {
       let url;
       if (this.id) {
         url = `/api/posts/${this.id}/${page}`;
+        console.log(url);
         axios
           .get(url)
           .then(res => {
@@ -97,7 +98,8 @@ export default {
             this.alertText = err.response.data.message;
           });
       } else {
-        url = `/api/posts`;
+        url = `/api/posts/${page}`;
+
         axios
           .get(url)
           .then(res => {

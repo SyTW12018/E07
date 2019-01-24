@@ -9,6 +9,7 @@ import EnterpriseProfile from './components/EnterpriseProfile'
 import Jobs from './views/Jobs'
 import JobList from './components/JobList'
 import User from './views/User'
+import Feed from './views/Feed'
 
 Vue.use(Router)
 
@@ -36,6 +37,14 @@ let router = new Router({
       path: '/account',
       name: 'Account',
       component: Account,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/feed',
+      name: 'Feed',
+      component: Feed,
       meta: {
         requiresAuth: true
       }

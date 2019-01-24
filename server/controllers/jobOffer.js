@@ -92,7 +92,8 @@ function getAllOffers(req, res) {
     let options = {
         page: Number(params.page),
         limit: 3,
-        populate: 'enterprise'
+        populate: 'enterprise',
+        sort: { published: -1 }
 
     }
     Offer.paginate({}, options, (err, result) => {
@@ -116,7 +117,8 @@ function getOffersOfEnterprise(req, res) {
     let params = req.params;
     let options = {
         page: Number(params.page),
-        limit: 3
+        limit: 3,
+        sort: { published: -1 }
     }
     Offer.paginate({ enterprise: params.id }, options, (err, result) => {
         if (err) {
