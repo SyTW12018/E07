@@ -85,7 +85,9 @@
       right
     >
       {{ snackbarText }}
-      <v-btn dark flat @click="snackbar = false">Close</v-btn>
+      <v-btn dark flat @click="snackbar = false">
+        <v-icon>close</v-icon>
+      </v-btn>
     </v-snackbar>
   </div>
 </template>

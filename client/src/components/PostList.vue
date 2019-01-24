@@ -55,6 +55,7 @@
 <script>
 import axios from "axios";
 import moment from "moment";
+moment.locale("es");
 export default {
   name: "PostList",
   data: () => ({
