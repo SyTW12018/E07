@@ -49,7 +49,6 @@ export default {
           this.loading = false;
         })
         .catch(err => {
-          console.log(err);
           this.$router.push({ name: "Home" });
         });
     }

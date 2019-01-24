@@ -25,35 +25,19 @@
             <v-btn router-link to="./jobs" append flat color="blue">Ofertas de Trabajo</v-btn>
           </v-card-actions>
         </v-card>
-        <hr class="m-3">
-        <v-card>
-          <v-card-text>
-            <v-layout row align-center>
-              <v-layout column xs1>
-                <v-img max-height="50" contain src="https://www.w3schools.com/w3images/avatar2.png"></v-img>
-              </v-layout>
-              <v-layout column xs11>
-                <h3 class="headline">{{this.enterprise}}</h3>
-                <div>
-                  <p>LOREM IPSUM POST</p>
-                </div>
-              </v-layout>
-            </v-layout>
-          </v-card-text>
-        </v-card>
+        <v-divider class="m-3"></v-divider>
+        <PostList :id="this.id"/>
       </v-flex>
     </v-layout>
   </div>
 </template>
 <script>
+import PostList from "./PostList";
 export default {
   name: "EnterpriseProfile",
-  props: {
-    loading: true,
-    enterprise: "",
-    place: "",
-    description: "",
-    id: ""
+  props: ["loading", "enterprise", "place", "description", "id"],
+  components: {
+    PostList
   }
 };
 </script>

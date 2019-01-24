@@ -6,8 +6,8 @@ import Registro from './views/Registro'
 import Account from './views/Account'
 import Enterprise from './views/Enterprise'
 import EnterpriseProfile from './components/EnterpriseProfile'
-import EnterpriseJobs from './components/EnterpriseJobs'
 import Jobs from './views/Jobs'
+import JobList from './components/JobList'
 
 Vue.use(Router)
 
@@ -17,13 +17,9 @@ let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/home',
       name: 'Home',
-      component: Home
+      component: Home,
+      alias: '/home'
     },
     {
       path: '/login',
@@ -52,7 +48,7 @@ let router = new Router({
       },
       children: [
         { path: "", component: EnterpriseProfile },
-        { path: "jobs", component: EnterpriseJobs, props: true }
+        { path: "jobs", component: JobList, props: true }
       ]
     },
     {

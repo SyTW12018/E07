@@ -117,7 +117,9 @@ function getPostsOfUser(req, res) {
                                         onModel: curr.onModel,
                                         body: curr.body,
                                         createAt: curr.createAt,
-                                        creator: curr.creator
+                                        creator: {
+                                                nameEnterprise: curr.creator.nameEnterprise
+                                        }
                                 }
                         }
 

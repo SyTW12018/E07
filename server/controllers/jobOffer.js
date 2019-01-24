@@ -101,7 +101,7 @@ function getAllOffers(req, res) {
         }
         else {
             if (!result.total) {
-                res.status(404).send({ message: "Esta empresa no dispone actualmente de ofertas de trabajo" });
+                res.status(404).send({ message: "No hay ofertas de trabajo disponibles" });
             }
             else {
                 res.status(200).send({ message: "Ofertas encontradas", offers: result.docs, total: result.total })
@@ -114,16 +114,20 @@ function getAllOffers(req, res) {
 
 function getOffersOfEnterprise(req, res) {
     let params = req.params;
-    Offer.find({ enterprise: params.id }, (err, offers) => {
+    let options = {
+        page: Number(params.page),
+        limit: 3
+    }
+    Offer.paginate({ enterprise: params.id }, options, (err, result) => {
         if (err) {
             res.status(500).send({ message: "Error en el servidor" });
         }
         else {
-            if (!offers) {
-                res.status(200).send({ message: "No existen ofertas de esta empresa" });
+            if (!result.total) {
+                res.status(404).send({ message: "No existen ofertas de esta empresa" });
             }
             else {
-                res.status(200).send({ offers });
+                res.status(200).send({ message: "Ofertas encontradas", offers: result.docs, total: result.total });
             }
         }
     })
