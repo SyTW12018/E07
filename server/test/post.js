@@ -92,7 +92,7 @@ describe('Test for offer Controller', () => {
 
     describe('Get Posts', (done) => {
         it('Get all posts', (done) => {
-            chai.request(server).get('/api/posts').set({ authorization: token }).send().end((err, res) => {
+            chai.request(server).get('/api/posts/1').set({ authorization: token }).send().end((err, res) => {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
                 res.body.should.have.property('posts');
