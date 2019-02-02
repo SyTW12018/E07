@@ -3,18 +3,14 @@ node_js:
 - 'node'
 env: ENV=test
 install:
-- cd client
-- npm install
-- cd ../server
-- npm install
+- cd client && npm install
 cache:
   directories:
-    - ./server/node_modules
     - ./client/node_modules
     - ~/.sonar
 script:
 - sonar-scanner -Dproject.settings=../sonar-project.properties
-- cd ../server && npm test
+- cd client && npm test
 services:
 - mongodb
 notifications:

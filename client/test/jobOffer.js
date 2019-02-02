@@ -2,9 +2,9 @@
 
 const chaiHttp = require('chai-http');
 
-let User = require('../models/user');
-let Offer = require('../models/jobOffer');
-let server = require('../src/server');
+let User = require('../src/server/models/user');
+let Offer = require('../src/server/models/jobOffer');
+let server = require('../src/server/src/server');
 let moment = require('moment');
 
 const chai = require('chai');

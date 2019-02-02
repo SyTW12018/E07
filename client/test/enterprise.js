@@ -2,9 +2,9 @@
 
 const chaiHttp = require('chai-http');
 
-let Enterprise = require('../models/enterprise');
-let User = require('../models/user');
-let server = require('../src/server');
+let Enterprise = require('../src/server/models/enterprise');
+let User = require('../src/server/models/user');
+let server = require('../src/server/src/server');
 
 const chai = require('chai');
 
