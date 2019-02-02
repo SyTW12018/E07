@@ -10,7 +10,7 @@ cache:
     - ~/.sonar
 script:
 - sonar-scanner -Dproject.settings=../sonar-project.properties
-- cd client && npm test
+- npm test
 services:
 - mongodb
 notifications:
