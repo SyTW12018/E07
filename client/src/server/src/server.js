@@ -5,8 +5,8 @@ require('dotenv').config();
 let mongoose = require('mongoose');
 let app = require('./app');
 
-let port = process.env.PORT || 4500;
-let host = process.env.HOST || 'localhost';
+let port = process.env.API_PORT || 4500;
+let host = process.env.API_HOST || 'localhost';
 
 let mongoURI;
 if (process.env.ENV == 'test') {
@@ -22,6 +22,7 @@ if (process.env.ENV == 'test') {
     mongoURI = `mongodb://${dbuser}:${dbpass}@${dbhost}:${dbport}/${dbname}`;
 }
 
+console.log(mongoURI)
 mongoose.connect(mongoURI, { useNewUrlParser: true }, (err, res) => {
     if (!err) {
         console.log("Mongoose Connected");
