@@ -16,6 +16,13 @@
               :value="surname"
               label="Apellidos"
             ></v-text-field>
+            <v-textarea
+              v-model="newDescription"
+              :placeholder="description"
+              :value="description"
+              label="Description"
+              auto-grow
+            ></v-textarea>
             <v-text-field
               v-model="newEmail"
               :placeholder="email"
@@ -47,6 +54,7 @@ export default {
     passwordRules: [v => !!v || "Campo vacío. Por favor rellenelo"],
     newSurname: "",
     newEmail: "",
+    newDescription: "",
     emailRules: [
       v =>
         /[A-z0-9]+@[A-z0-9]+\.[A-z0-9]+/.test(v) ||
@@ -68,6 +76,9 @@ export default {
     email: function() {
       return this.$store.getters.user.email;
     },
+    description: function() {
+      return this.$store.getters.user.description;
+    },
     id: function() {
       return this.$store.getters.user.id;
     }
@@ -82,8 +93,14 @@ export default {
         params.surname = this.newSurname;
       if (this.newEmail !== "" && this.newEmail !== this.email)
         params.newEmail = this.newEmail;
+      if (
+        this.newDescription !== "" &&
+        this.newDescription !== this.description
+      )
+        params.newDescription = this.newDescription;
       params.password = this.oldPassword;
       params.email = this.email;
+
       console.log(params);
       let res = await this.$store.dispatch("updateInfo", params);
       this.alertText = res.message;

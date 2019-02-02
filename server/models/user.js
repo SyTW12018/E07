@@ -16,7 +16,9 @@ let userSchema = new Schema({
     },
     name: String,
     surname: String,
-    role: String
+    role: String,
+    avatar: String,
+    description: String
 });
 
 userSchema.plugin(uniqueValidation);

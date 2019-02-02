@@ -8,7 +8,13 @@
               <h2>Registrate ya!</h2>
             </v-flex>
             <v-alert v-model="res" :type="resType" transition="scale-transition">{{alertText}}</v-alert>
-            <v-text-field id="text-field" v-model="name" :rules="nameRules" label="Nombre" required></v-text-field>
+            <v-text-field
+              id="text-field"
+              v-model="name"
+              :rules="nameRules"
+              label="Nombre de Usuario"
+              required
+            ></v-text-field>
             <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
             <v-text-field
               v-model="password"

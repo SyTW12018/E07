@@ -5,11 +5,11 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let enterpriseSchema = new Schema({
-
     nameEnterprise: String,
     place: String,
     created: Number,
-    description: String
+    description: String,
+    avatar: String
 
 });
 

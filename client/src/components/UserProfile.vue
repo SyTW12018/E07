@@ -6,19 +6,15 @@
           <v-card-title primary-title>
             <v-layout row>
               <v-layout column xs1>
-                <v-img
-                  max-height="125"
-                  contain
-                  src="https://www.w3schools.com/w3images/avatar2.png"
-                ></v-img>
+                <v-img max-height="125" contain :src="`/public/user/${this.user.avatar}`"></v-img>
               </v-layout>
               <v-layout column xs1 class="ml-2">
-                <h3 class="headline">{{this.name}} {{this.surname}}</h3>
+                <h3 class="headline">{{this.user.name}} {{this.user.surname}}</h3>
               </v-layout>
             </v-layout>
           </v-card-title>
           <v-card-text>
-            <p>{{this.description}}</p>
+            <p>{{this.user.description}}</p>
           </v-card-text>
         </v-card>
         <v-divider class="m-3"></v-divider>
@@ -30,8 +26,8 @@
 <script>
 import PostList from "./PostList";
 export default {
-  name: "EnterpriseProfile",
-  props: ["name", "surname", "description", "id"],
+  name: "UserProfile",
+  props: ["user", "id"],
   components: {
     PostList
   }

@@ -14,7 +14,6 @@ if (token) {
 }
 
 Vue.prototype.$http.interceptors.response.use(undefined, (err) => {
-  console.log("error response intercepted");
   if (err.response.status === 401 && err.config && !err.config.__isRetryRequest) {
     store.dispatch('logout');
     router.push({ name: 'Login' });

@@ -49,7 +49,8 @@ export default new Vuex.Store({
             name: res.data.user.name,
             surname: res.data.user.surname,
             username: res.data.user.username,
-            email: res.data.user.email
+            email: res.data.user.email,
+            description: res.data.user.description
           })
         );
         axios.defaults.headers.common['Authorization'] = token;
@@ -91,7 +92,8 @@ export default new Vuex.Store({
               name: res.data.user.name,
               surname: res.data.user.surname,
               username: res.data.user.username,
-              email: res.data.user.email
+              email: res.data.user.email,
+              description: res.data.user.description
             })
           );
           axios.defaults.headers.common['Authorization'] = token;

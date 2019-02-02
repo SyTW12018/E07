@@ -62,7 +62,8 @@ function getAllPosts(req, res) {
                                         body: curr.body,
                                         createAt: curr.createAt,
                                         creator: {
-                                                username: curr.creator.username
+                                                username: curr.creator.username,
+                                                avatar: curr.creator.avatar
                                         }
                                 }
                         } else {
@@ -72,7 +73,8 @@ function getAllPosts(req, res) {
                                         body: curr.body,
                                         createAt: curr.createAt,
                                         creator: {
-                                                nameEnterprise: curr.creator.nameEnterprise
+                                                nameEnterprise: curr.creator.nameEnterprise,
+                                                avatar: curr.creator.avatar
                                         }
                                 }
                         }
@@ -109,7 +111,8 @@ function getPostsOfUser(req, res) {
                                         body: curr.body,
                                         createAt: curr.createAt,
                                         creator: {
-                                                username: curr.creator.username
+                                                username: curr.creator.username,
+                                                avatar: curr.creator.avatar
                                         }
                                 }
                         } else {
@@ -119,7 +122,8 @@ function getPostsOfUser(req, res) {
                                         body: curr.body,
                                         createAt: curr.createAt,
                                         creator: {
-                                                nameEnterprise: curr.creator.nameEnterprise
+                                                nameEnterprise: curr.creator.nameEnterprise,
+                                                avatar: curr.creator.avatar
                                         }
                                 }
                         }

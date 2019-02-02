@@ -14,6 +14,8 @@ function registerUser(req, res) {
         newUser.role = 'ROLE_USER';
         newUser.name = "";
         newUser.surname = "";
+        newUser.avatar = params.avatar ? params.avatar : "default.jpg";
+        newUser.description = "";
         if (params.password) {
             bcrypt.hash(params.password, null, null, (err, hash) => {
                 newUser.password = hash;
@@ -110,6 +112,7 @@ function updateUser(req, res) {
                     if (params.name) update.name = params.name;
                     if (params.surname) update.surname = params.surname;
                     if (params.newEmail) update.email = params.newEmail;
+                    if (params.newDescription) update.description = params.newDescription;
                     User.findOneAndUpdate({ email: params.email }, update, { new: true }, (err, updatedUser) => {
                         if (err) {
                             res.status(500).send({ message: "Error al actualizar el usuario" });

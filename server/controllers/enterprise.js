@@ -12,6 +12,7 @@ function newEnterprise(req, res) {
     newEnterprise.place = params.place;
     newEnterprise.created = moment().unix();
     newEnterprise.description = params.description;
+    newEnterprise.avatar = params.avatar;
 
     newEnterprise.save((err, enterpriseSaved) => {
         if (err) {

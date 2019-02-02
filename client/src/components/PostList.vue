@@ -16,7 +16,13 @@
           <v-card-text>
             <v-layout row align-center>
               <v-layout column xs1>
-                <v-img max-height="50" contain src="https://www.w3schools.com/w3images/avatar2.png"></v-img>
+                <v-img
+                  v-if="post.onModel == 'enterprise'"
+                  max-height="50"
+                  contain
+                  :src="`/public/business/${post.creator.avatar}`"
+                ></v-img>
+                <v-img v-else max-height="50" contain :src="`/public/user/${post.creator.avatar}`"></v-img>
               </v-layout>
               <v-layout column xs11>
                 <v-layout row>
@@ -80,7 +86,6 @@ export default {
       let url;
       if (this.id) {
         url = `/api/posts/${this.id}/${page}`;
-        console.log(url);
         axios
           .get(url)
           .then(res => {

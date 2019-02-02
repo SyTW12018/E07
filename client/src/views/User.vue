@@ -7,13 +7,7 @@
         </v-layout>
       </v-container>
     </div>
-    <UserProfile
-      v-else
-      :id="this.id"
-      :name="this.name"
-      :surname="this.surname"
-      :description="this.description"
-    />
+    <UserProfile v-else :id="this.id" :user="this.user"/>
   </div>
 </template>
 
@@ -23,9 +17,7 @@ import UserProfile from "../components/UserProfile";
 export default {
   data: () => ({
     id: "",
-    enterprise: "",
-    place: "",
-    description: "",
+    user: "",
     loading: true
   }),
   computed: {
@@ -37,14 +29,10 @@ export default {
     async info() {
       this.loading = true;
       let url = `/api/user/${this.username}`;
-      console.log("url", url);
       await axios
         .get(url)
         .then(res => {
-          console.log(res);
-          this.name = res.data.user.name;
-          this.surname = res.data.user.surname;
-          //this.description = res.data.enterprise.description;
+          this.user = res.data.user;
           this.id = res.data.user._id;
         })
         .catch(err => {
