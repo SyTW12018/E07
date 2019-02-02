@@ -51,5 +51,8 @@ app.use((req, res, next) => {
     next();
 });
 
+//Public Folder
+app.use('/public', express.static('public'));
+
 
 module.exports = app;
