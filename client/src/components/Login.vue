@@ -72,7 +72,7 @@ export default {
       this.resType = res.resType;
       this.res = true;
       if (res.resType == "success") {
-        this.$router.push({ name: "home" });
+        this.$router.push({ name: "Feed" });
       }
     },
     clear() {
