@@ -25,39 +25,53 @@
                 <v-card v-for="offer in this.offers" class="card">
                   <v-card-text>
                     <v-layout row align-center>
-                      <v-layout column xs1>
-                        <v-img
-                          max-height="50"
-                          contain
-                          src="https://www.w3schools.com/w3images/avatar2.png"
-                        ></v-img>
-                      </v-layout>
-                      <v-layout column xs11>
+                      <v-layout column>
                         <div v-if="enterprise">
-                          <router-link class="router-link" :to="`/business/${enterprise}`">
-                            <h3 class="headline">{{enterprise}}</h3>
-                          </router-link>
+                          <img class="avatar" :src="`/public/business/${enterprise.avatar}`">
                         </div>
                         <div v-else>
-                          <router-link
-                            class="router-link"
-                            :to="`/business/${offer.enterprise.nameEnterprise}`"
-                          >
-                            <h3 class="headline">{{offer.enterprise.nameEnterprise}}</h3>
-                          </router-link>
-                        </div>
-                        <div>
-                          <p>
-                            Lugar: {{offer.place}}
-                            <br>
-                            Experiencia Necesaria: {{offer.exp}}
-                            <br>
-                            Tipo de trabajo: {{offer.kindOfJob}}
-                            <br>
-                            Salario: {{offer.salary}} €
-                          </p>
+                          <img class="avatar" :src="`/public/business/${offer.enterprise.avatar}`">
                         </div>
                       </v-layout>
+                      <v-layout column>
+                        <v-layout row>
+                          <div v-if="enterprise">
+                            <router-link
+                              class="router-link"
+                              :to="`/business/${enterprise.nameEnterprise}`"
+                            >
+                              <h3 class="headline">{{enterprise.nameEnterprise}}</h3>
+                            </router-link>
+                          </div>
+                          <div v-else>
+                            <router-link
+                              class="router-link"
+                              :to="`/business/${offer.enterprise.nameEnterprise}`"
+                            >
+                              <h3 class="headline">{{offer.enterprise.nameEnterprise}}</h3>
+                            </router-link>
+                          </div>
+                        </v-layout>
+                        <v-layout row>
+                          <div>
+                            <p>
+                              Lugar: {{offer.place}}
+                              <br>
+                              Experiencia Necesaria: {{offer.exp}}
+                              <br>
+                              Tipo de trabajo: {{offer.kindOfJob}}
+                              <br>
+                              Salario: {{offer.salary}} €
+                            </p>
+                          </div>
+                        </v-layout>
+                      </v-layout>
+                    </v-layout>
+                    <v-divider class="mb-2"></v-divider>
+                    <v-layout row>
+                      <div>
+                        <p>{{offer.description}}</p>
+                      </div>
                     </v-layout>
                   </v-card-text>
                   <v-card-actions>
@@ -178,6 +192,9 @@ export default {
 };
 </script>
 <style scoped>
+.avatar {
+  max-height: 100px;
+}
 .card {
   margin-bottom: 3px;
 }

@@ -15,37 +15,35 @@
         <v-card class="card" v-for="post in posts">
           <v-card-text>
             <v-layout row align-center>
-              <v-layout column xs1>
-                <v-img
-                  v-if="post.onModel == 'enterprise'"
-                  max-height="50"
-                  contain
-                  :src="`/public/business/${post.creator.avatar}`"
-                ></v-img>
-                <v-img v-else max-height="50" contain :src="`/public/user/${post.creator.avatar}`"></v-img>
-              </v-layout>
-              <v-layout column xs11>
-                <v-layout row>
-                  <div v-if="post.onModel == 'enterprise'">
-                    <router-link
-                      class="router-link"
-                      :to="`/business/${post.creator.nameEnterprise}`"
-                    >
-                      <h3 class="headline">{{post.creator.nameEnterprise}}</h3>
-                    </router-link>
-                  </div>
-                  <div v-else>
-                    <router-link class="router-link" :to="`/user/${post.creator.username}`">
-                      <h3 class="headline">{{post.creator.username}}</h3>
-                    </router-link>
-                  </div>
-                  <h6 class="mlauto">{{postDate(post.createAt)}}</h6>
-                </v-layout>
-
-                <div>
-                  <p>{{post.body}}</p>
+              <v-layout column>
+                <div v-if="post.onModel == 'enterprise'">
+                  <img class="avatar" :src="`/public/business/${post.creator.avatar}`">
+                </div>
+                <div v-else>
+                  <img class="avatar" :src="`/public/user/${post.creator.avatar}`">
                 </div>
               </v-layout>
+              <v-layout column>
+                <div v-if="post.onModel == 'enterprise'">
+                  <router-link class="router-link" :to="`/business/${post.creator.nameEnterprise}`">
+                    <h3 class="headline">{{post.creator.nameEnterprise}}</h3>
+                  </router-link>
+                </div>
+                <div v-else>
+                  <router-link class="router-link" :to="`/user/${post.creator.username}`">
+                    <h3 class="headline">{{post.creator.username}}</h3>
+                  </router-link>
+                </div>
+              </v-layout>
+              <v-layout column>
+                <h6 class="mlauto">{{postDate(post.createAt)}}</h6>
+              </v-layout>
+            </v-layout>
+            <v-divider class="mt-1 mb-1"></v-divider>
+            <v-layout row>
+              <div>
+                <p>{{post.body}}</p>
+              </div>
             </v-layout>
           </v-card-text>
         </v-card>
@@ -129,6 +127,9 @@ export default {
 };
 </script>
 <style scoped>
+.avatar {
+  max-height: 50px;
+}
 .router-link {
   text-decoration: none;
 }
